@@ -52,7 +52,7 @@
 \pagestyle{fancy}
 
 \newfontfamily\headerfontspaced{FiraSans}[
-  Path = /Users/mbauer/Library/Fonts/,
+  Path            =   fonts/,
   UprightFont     =   *-Regular,
   BoldFont        =   *-Bold,
   ItalicFont      =   *-Italic,
@@ -61,7 +61,7 @@ LetterSpace=15
 ]
 
 \newfontfamily\headerfont{FiraSans}[
-  Path = /Users/mbauer/Library/Fonts/,
+  Path            =   fonts/,
   UprightFont     =   *-Regular,
   BoldFont        =   *-Bold,
   ItalicFont      =   *-Italic,
@@ -69,7 +69,7 @@ LetterSpace=15
 ]
 
 \newfontfamily\footerfont{FiraSans}[
-  Path = /Users/mbauer/Library/Fonts/,
+  Path            =   fonts/,
   UprightFont     =   *-Regular,
   BoldFont        =   *-Bold,
   ItalicFont      =   *-Italic,
@@ -77,7 +77,7 @@ LetterSpace=15
 ]
 
 \newfontfamily\bodyfont{Charter}[
-  Path = /Users/mbauer/Library/Fonts/,
+  Path            =   fonts/,
   UprightFont     =   * Regular,
   BoldFont        =   * Bold,
   ItalicFont      =   * Italic,
