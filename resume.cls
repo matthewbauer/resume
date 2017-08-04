@@ -51,35 +51,44 @@
 \fancyhf{}
 \pagestyle{fancy}
 
+\newfontfamily\headerfontspaced{FiraSans}[
+  Path = /Users/mbauer/Library/Fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic,
+LetterSpace=15
+]
+
 \newfontfamily\headerfont{FiraSans}[
-Path = /Users/mbauer/Library/Fonts/,
-UprightFont     =   *-Regular,
-BoldFont        =   *-Bold,
-ItalicFont      =   *-Italic,
-BoldItalicFont  =   *-BoldItalic
+  Path = /Users/mbauer/Library/Fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic
 ]
 
 \newfontfamily\footerfont{FiraSans}[
-Path = /Users/mbauer/Library/Fonts/,
-UprightFont     =   *-Regular,
-BoldFont        =   *-Bold,
-ItalicFont      =   *-Italic,
-BoldItalicFont  =   *-BoldItalic
+  Path = /Users/mbauer/Library/Fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic
 ]
 
 \newfontfamily\bodyfont{Charter}[
-Path = /Users/mbauer/Library/Fonts/,
-UprightFont     =   * Regular,
-BoldFont        =   * Bold,
-ItalicFont      =   * Italic,
-BoldItalicFont  =   * Bold Italic
+  Path = /Users/mbauer/Library/Fonts/,
+  UprightFont     =   * Regular,
+  BoldFont        =   * Bold,
+  ItalicFont      =   * Italic,
+  BoldItalicFont  =   * Bold Italic
 ]
 
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1em}\headerfont\MakeUppercase{#1} }}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1em}\headerfont\MakeUppercase{#1} }}
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }}
 
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{10pt}{1.5em}\headerfont #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{10pt}{1em}\headerfontspaced #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{8pt}{1em}\headerfont #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape #1}}
@@ -288,13 +297,13 @@ BoldItalicFont  =   * Bold Italic
 
 \newenvironment{cvitems}{
   \vspace{-4.0mm}
-  \begin{justify}
+  %% \begin{justify}
   \begin{itemize}[leftmargin=2ex, rightmargin=4cm, nosep, noitemsep]
     \setlength\itemsep{0.5em}
     \setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
 }{
   \end{itemize}
-  \end{justify}
+  %% \end{justify}
   \vspace{-4.0mm}
 }
