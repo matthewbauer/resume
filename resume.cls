@@ -32,7 +32,6 @@
 \defaultfontfeatures{Ligatures=TeX}
 
 \RequirePackage{unicode-math}
-\RequirePackage[default,opentype]{sourcesanspro}
 \RequirePackage[skins]{tcolorbox}
 \RequirePackage{parskip}
 \RequirePackage[hidelinks,unicode]{hyperref}
