@@ -298,7 +298,7 @@ LetterSpace=15
 \newenvironment{cvitems}{
   \vspace{-4.0mm}
   %% \begin{justify}
-  \begin{itemize}[leftmargin=2ex, rightmargin=4cm, nosep, noitemsep]
+  \begin{itemize}[leftmargin=2ex, rightmargin=4.5cm, nosep, noitemsep]
     \setlength\itemsep{0.5em}
     \setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
