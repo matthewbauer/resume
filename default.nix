@@ -23,9 +23,7 @@ in stdenv.mkDerivation {
 
   buildPhase = ''
     export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    export NIX_PATH=${builtins.getEnv "NIX_PATH"}
-
-    nix-build ${README}/build.nix
+    nix-build ${README}/build.nix --arg nixpkgs "import ${nixpkgs} {}"
   '';
 
   installPhase = ''
