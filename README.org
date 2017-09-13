@@ -9,6 +9,7 @@
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
 #+LATEX_HEADER: \usepackage{alltt}
 #+LATEX_HEADER: \usepackage{upquote}
+#+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline path:http://orgmode.org/org-info.js
 * Intro
 
   Recently, ‘reproducible’ papers have become popular in Academia. The idea is
