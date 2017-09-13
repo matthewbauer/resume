@@ -6,8 +6,7 @@ matrix:
   include:
     - os: linux
       env: NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
+    - os: linux
+      env: NIXPKGS=nixos.org/channels/nixos-17.03/nixexprs.tar.xz
     - os: osx
       env: NIXPKGS=nixos.org/channels/nixpkgs-17.09-darwin/nixexprs.tar.xz
-
-    - os: linux
-      env: NIXPKGS=github.com/NixOS/nixpkgs-channels/archive/nixos-17.03.tar.gz

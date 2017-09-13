@@ -926,9 +926,7 @@ in stdenv.mkDerivation {
   #+BEGIN_SRC nix
   buildPhase = ''
     export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    export NIX_PATH=${builtins.getEnv "NIX_PATH"}
-
-    nix-build ${README}/build.nix
+    nix-build ${README}/build.nix --arg nixpkgs "import ${nixpkgs} {}"
   '';
   #+END_SRC
 
@@ -983,23 +981,20 @@ script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}"
    #+END_SRC
 
    This line tells Travis what to build. The ~$NIXPKGS~ variable should become
-   clear later on.
+   clear after reading the usage below.
 
    #+BEGIN_SRC yaml
 matrix:
   include:
     - os: linux
       env: NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
+    - os: linux
+      env: NIXPKGS=nixos.org/channels/nixos-17.03/nixexprs.tar.xz
     - os: osx
       env: NIXPKGS=nixos.org/channels/nixpkgs-17.09-darwin/nixexprs.tar.xz
    #+END_SRC
 
-   This will build two résumés one on a Linux machine and one on macOS.
-
-   #+BEGIN_SRC yaml
-    - os: linux
-      env: NIXPKGS=github.com/NixOS/nixpkgs-channels/archive/nixos-17.03.tar.gz
-   #+END_SRC
+   This will build three résumés two on Linux machine and one on macOS.
 
    To make sure our package works on older versions of Nix, I’ve added the NixOS
    channel to give you an idea of why it would be useful to override =nixpkgs=
