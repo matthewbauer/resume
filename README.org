@@ -1,0 +1,1019 @@
+#+TITLE: Reproducible résumés
+#+AUTHOR: Matthew Bauer
+#+EMAIL: mjbauer95@gmail.com
+#+LANGUAGE: en
+#+BABEL: :cache yes
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{inconsolata}
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \usepackage{alltt}
+#+LATEX_HEADER: \usepackage{upquote}
+* Intro
+
+  Recently, ‘reproducible’ papers have become popular in Academia. The idea is
+  to make all of the data and code available for researchers to reproduce the
+  findings of the paper in an accessible location. It makes more sense in
+  computer science contexts than others but the basic idea can be applied
+  everywhere. Technologies like org-mode’s literate programming engine, Babel
+  and Nix, the functional package manager, make this kind of thing very easy to
+  do.
+
+  This idea hasn’t seen wide used in industry, however. That’s a shame because I
+  find it to be extremely useful in any kind of software projects.
+
+  To make this more accessible for those outside Academia, I’m going to lay out
+  how to apply this to something everyone needs when applying for a job, a
+  résumé. This document will be all that is needed to generate my résumé. With
+  some minor adjustments it can be used by others.
+
+  At the end of this guide, you should be able to produce a PDF résume that can
+  be sent to employers.
+
+  Information on reproducible research is available at
+  http://reproducibleresearch.net.
+
+* The Résumé
+  :PROPERTIES:
+  :header-args: :tangle   resume.tex
+  :END:
+
+  LaTeX makes it very easy to generate Résumés. It provides extremely powerful
+  typesetting features that can generate PDFs. Some of the syntax is scary to
+  the unexperienced but I’ve tried to keep it as simple as possible.
+
+** Headers
+
+  Set the document class for this document. This will store the LaTeX styling
+  while the rest of this document will contain actual content of my Résumé.
+
+  #+BEGIN_SRC latex
+\documentclass[11pt]{resume}
+  #+END_SRC
+
+** Semantic info
+   Next, I’ll provide some semantic information.
+
+*** Name
+    Name commands works first, then last.
+
+   #+BEGIN_SRC latex
+\name{Matthew}{Bauer}
+   #+END_SRC
+
+*** Address
+    Now add a postal address,
+
+   #+BEGIN_SRC latex
+\address{10118 GARNETT ST, OVERLAND PARK KS 66214}
+   #+END_SRC
+
+*** Mobile
+   And mobile number,
+
+   #+BEGIN_SRC latex
+\mobile{(913) 671 0636}
+   #+END_SRC
+
+*** Email 
+
+   #+BEGIN_SRC latex
+\email{mjbauer95@gmail.com}
+   #+END_SRC
+
+*** Homepage
+   #+BEGIN_SRC latex
+\homepage{www.matthewbauer.us}
+
+   #+END_SRC
+
+** LaTeX Document
+
+   This begins the document. The command =makecvheader= will setup the basic
+   template.
+
+  #+BEGIN_SRC latex
+\begin{document}
+
+\makecvheader[C]
+  #+END_SRC
+
+  Everything that follows is personal info, but the ideas should be fairly self-explanatory.
+
+*** Education
+
+  Each =cvsection= is separated by a horizontal line.
+
+  I’ll start with ‘Eduction’.
+
+  #+BEGIN_SRC latex
+\cvsection{Education}
+
+\begin{cventries}
+  #+END_SRC
+
+  Each =cvsection= is composed of multiple
+
+  The education section provides some basic info on my education history. I only
+  have one entry for education.
+
+  #+BEGIN_SRC latex
+\cventry
+  {University of Kansas}
+  {Lawrence, KS, USA}
+  {B.S. in Computer Science, 3.4 GPA}
+  {Aug. 2015 – Exp. Dec. 2018}
+  {
+    \begin{cvitems}
+    \item { Participated in ACM and hackathon competitions }
+    \item { Coursework includes Software Engineering, Programming Languages,
+        and Communication Networks }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+  =cventry= can be though of as a function that takes a variable 5 arguments.
+  The first will be the heading used. The second will be on the right-hand side
+  in /italics/. The third will be in /italics/ immediately below the first. The
+  fourth will be on the right-hand side of the third argument. The last argument
+  provides items for the entry.
+
+  For my résumé, I have chosen to use each of these arguments for certain
+  purposes. It’s not necessary to do the same, but you should use a consistent
+  style throughout your résumé.
+
+  | left         | right        |
+  |--------------+--------------|
+  | argument 1   | /argument 2/ |
+  | /argument 3/ | /argument 4/ |
+
+  For me, they correspond to,
+
+  | left                  | right                   |
+  |-----------------------+-------------------------|
+  | Company or University | /Location/              |
+  | /Position or degree/  | /Start date - end date/ |
+
+  #+BEGIN_SRC latex
+\end{cventries}
+  #+END_SRC
+
+*** Work experience
+
+  The next section has work experience. It follows the same pattern outlined in
+  the Education section.
+
+**** Header
+  #+BEGIN_SRC latex
+\cvsection{Work Experience}
+
+\begin{cventries}
+  #+END_SRC
+
+**** Amazon
+
+  #+BEGIN_SRC latex
+\cventry
+  {Amazon.com, Inc.}
+  {Seattle, WA, USA}
+  {SDE Intern}
+  {Summer 2017}
+  {
+    \begin{cvitems}
+    \item { Worked on Mobile Identity team which manages the login screens for
+            Amazon apps }
+    \item { Project made it easier for teams to register new devices through
+            Identity Services }
+    \item { Used Agile development principles in design and development of
+            project }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+**** Lexmark
+
+  #+BEGIN_SRC latex
+\cventry
+  {Lexmark Enterprise Software}
+  {Lenexa, KS, USA}
+  {Software Engineer Intern}
+  {Summer 2015, Summer 2016}
+  {
+    \begin{cvitems}
+    \item { Worked on the Client Architecture team which builds the JavaScript
+        web framework which other teams use to build enterprise solutions }
+    \item { Participated in high level design decision conversations }
+    \item { Project moved the web framework away from in-house solutions to
+        better maintained open source projects while preserving legacy
+        compatibility }
+    \item { Asked to return after impressive first year }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+**** Together+Clinic
+
+  #+BEGIN_SRC latex
+\cventry
+  {Together+Clinic}
+  {Lincoln, NE, USA}
+  {Design Studio Intern}
+  {Spring 2015}
+  {
+    \begin{cvitems}
+    \item { Startup building web app to let doctors track patients recovering
+        from surgery without frequent checkup visits }
+    \item { The web interface is used by both patients to record progress and
+        doctors to track progress }
+    \item { Team used Scrum development principles for quick response and user
+        focused design }
+    \end{cvitems}
+  }
+
+  #+END_SRC
+
+**** Footer
+
+  Here we end =cventries=.
+
+  #+BEGIN_SRC latex
+\end{cventries}
+  #+END_SRC
+
+*** Honor & Awards
+
+Below are some awards I’ve received.
+
+**** Header
+  #+BEGIN_SRC latex
+\cvsection{Honors \& Awards}
+\begin{cvhonors}
+  #+END_SRC
+
+**** Jayhacks
+
+  #+BEGIN_SRC latex
+  \cvhonor
+  {3rd Place}
+  {JayHacks Hackathon}
+  {Lawrence, KS, USA}
+  {2017}
+  #+END_SRC
+
+**** Google Code-in
+
+  #+BEGIN_SRC latex
+  \cvhonor
+  {Grand Prize}
+  {Google Code-in}
+  {Mountain View, CA, USA}
+  {2013}
+  #+END_SRC
+
+***** Footer
+
+   #+BEGIN_SRC latex
+\end{cvhonors}
+   #+END_SRC
+
+**** Footer
+
+     The =makecvfooter= command gives a nice footer that will be put at the
+     bottom of each page. This can give us the document title and page numbering.
+     In addition, the LastPage command will tell us how many pages there are in
+     case we misplace a page while printing.
+
+     #+BEGIN_SRC latex
+\makecvfooter
+{BAUER}
+{\thepage}
+{\pageref{LastPage}}
+     #+END_SRC
+
+     #+BEGIN_SRC latex
+\end{document}
+     #+END_SRC
+
+** Styling
+   :PROPERTIES:
+   :header-args: :tangle resume.cls
+   :END:
+
+   Styling LaTeX can get a little difficult so I’ve based mine off of
+   @posquit0’s Awesome-CV. This template provided most of what you’ll see below.
+
+   In addition, I’ve followed some of Matthew Butterick’s guide on résumés. You
+   can read about it at http://practicaltypography.com/resumes.html.
+
+   #+BEGIN_SRC latex
+\ProvidesClass{resume}[2017/08/01 Resume Class]
+\NeedsTeXFormat{LaTeX2e}
+   #+END_SRC
+
+   These commands are necessary to declare any LaTeX class.
+
+   #+BEGIN_SRC latex
+\DeclareOption{draft}{\setlength\overfullrule{5pt}}
+\DeclareOption{final}{\setlength\overfullrule{0pt}}
+\DeclareOption*{
+  \PassOptionsToClass{\CurrentOption}{article}
+}
+\ProcessOptions\relax
+\LoadClass{article}
+   #+END_SRC
+
+   We’ll base this class off of the builtin =article= class.
+
+   #+BEGIN_SRC latex
+\RequirePackage{upquote}
+\RequirePackage{setspace}
+\RequirePackage{array}
+\RequirePackage{enumitem}
+\RequirePackage{ragged2e}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{xcolor}
+\RequirePackage{ifxetex}
+\RequirePackage{xifthen}
+\RequirePackage{etoolbox}
+\RequirePackage{setspace}
+\RequirePackage[quiet]{fontspec}
+\RequirePackage{unicode-math}
+\RequirePackage[skins]{tcolorbox}
+\RequirePackage{parskip}
+\RequirePackage[hidelinks,unicode]{hyperref}
+   #+END_SRC
+
+   Now we require some packages that we’ll need below. Each of these packages
+   will need to be pull in later. This process is explained in the Building it section.
+
+   #+BEGIN_SRC latex
+\geometry{left=4.0cm, top=2.0cm, right=4.0cm, bottom=2.0cm, footskip=.5cm}
+   #+END_SRC
+
+   Now we can setup the basic geometry of the résumé PDF.
+
+   #+BEGIN_SRC latex
+
+\hypersetup{
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={}
+}
+
+\fancyhfoffset{0em}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{}
+\pagestyle{fancy}
+   #+END_SRC
+
+   Next we setup some more basic metadata stuff...
+
+#+BEGIN_SRC latex
+\defaultfontfeatures{Ligatures=TeX}
+
+\newfontfamily\headerfontspaced{FiraSans}[
+  Path            =   fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic,
+  LetterSpace     =   15
+]
+
+\newfontfamily\headerfont{FiraSans}[
+  Path            =   fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic
+]
+
+\newfontfamily\footerfont{FiraSans}[
+  Path            =   fonts/,
+  UprightFont     =   *-Regular,
+  BoldFont        =   *-Bold,
+  ItalicFont      =   *-Italic,
+  BoldItalicFont  =   *-BoldItalic
+]
+
+\newfontfamily\bodyfont{Charter}[
+  Path            =   fonts/,
+  UprightFont     =   * Regular,
+  BoldFont        =   * Bold,
+  ItalicFont      =   * Italic,
+  BoldItalicFont  =   * Bold Italic
+]
+#+END_SRC
+
+  This sets up the fonts that we will use. I’ve chosen Fira and Charter to use.
+  They are both open source fonts and also recommended Butterick! You substitute
+  you’re own by changing the name and adding them to the [[./fonts]] directory.
+
+#+BEGIN_SRC latex
+\newcommand*{\headerfirstnamestyle}[1]{
+  {\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }
+}
+\newcommand*{\headerlastnamestyle}[1]{
+  {\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }
+}
+
+\newcommand*{\headerpositionstyle}[1]{
+  {\fontsize{7.6pt}{1em}\bodyfont\scshape #1}
+}
+\newcommand*{\headeraddressstyle}[1]{
+  {\fontsize{10pt}{1em}\headerfontspaced #1}
+}
+\newcommand*{\headersocialstyle}[1]{
+  {\fontsize{8pt}{1em}\headerfont #1}
+}
+\newcommand*{\headerquotestyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont\itshape #1}
+}
+\newcommand*{\footerstyle}[1]{
+  {\fontsize{8pt}{1em}\footerfont\scshape #1}
+}
+\newcommand*{\sectionstyle}[1]{
+  {\fontsize{8pt}{1em}\headerfont\bfseries\MakeUppercase{#1}}
+}
+\newcommand*{\subsectionstyle}[1]{
+  {\fontsize{8pt}{1em}\headerfont\scshape}
+}
+\newcommand*{\paragraphstyle}{
+  \fontsize{9pt}{1em}\bodyfont\upshape
+}
+
+\newcommand*{\entrytitlestyle}[1]{
+  {\fontsize{11pt}{1em}\headerfont\bfseries #1}
+}
+\newcommand*{\entrypositionstyle}[1]{
+  {\fontsize{8pt}{1em}\bodyfont\itshape #1}}
+\newcommand*{\entrydatestyle}[1]{
+  {\fontsize{8pt}{1em}\bodyfont\slshape #1}
+}
+\newcommand*{\entrylocationstyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont\slshape #1}
+}
+\newcommand*{\descriptionstyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont\upshape #1}
+}
+
+\newcommand*{\subentrytitlestyle}[1]{
+  {\fontsize{8pt}{1em}\bodyfont\mdseries #1}
+}
+\newcommand*{\subentrypositionstyle}[1]{
+  {\fontsize{7pt}{1em}\bodyfont\scshape #1}
+}
+\newcommand*{\subentrydatestyle}[1]{
+  {\fontsize{7pt}{1em}\bodyfont\slshape #1}
+}
+\newcommand*{\subentrylocationstyle}[1]{
+  {\fontsize{7pt}{1em}\bodyfont\slshape #1}
+}
+\newcommand*{\subdescriptionstyle}[1]{
+  {\fontsize{8pt}{1em}\bodyfont\upshape #1}
+}
+
+\newcommand*{\honortitlestyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont #1}
+}
+\newcommand*{\honorpositionstyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont\bfseries #1}
+}
+\newcommand*{\honordatestyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont #1}
+}
+\newcommand*{\honorlocationstyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont\slshape #1}
+}
+
+\newcommand*{\skilltypestyle}[1]{
+  {\fontsize{10pt}{1em}\bodyfont\bfseries #1}
+}
+\newcommand*{\skillsetstyle}[1]{
+  {\fontsize{9pt}{1em}\bodyfont #1}
+}
+#+END_SRC
+
+  Above we setup the basic font size and style to use for different parts of the doument.
+
+#+BEGIN_SRC latex
+\newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
+\newcommand*{\firstname}[1]{\def\@firstname{#1}}
+\newcommand*{\lastname}[1]{\def\@lastname{#1}}
+\newcommand*{\familyname}[1]{\def\@lastname{#1}}
+
+\newcommand*{\address}[1]{\def\@address{#1}}
+\newcommand*{\position}[1]{\def\@position{#1}}
+\newcommand*{\mobile}[1]{\def\@mobile{#1}}
+\newcommand*{\email}[1]{\def\@email{#1}}
+\newcommand*{\homepage}[1]{\def\@homepage{#1}}
+\newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
+\renewcommand*{\quote}[1]{\def\@quote{#1}}
+#+END_SRC
+
+  The above commands are all useful as semantic information.
+
+#+BEGIN_SRC latex
+\newcommand{\acvHeaderNameDelim}{\space}
+\newcommand{\acvHeaderAfterNameSkip}{.4mm}
+\newcommand{\acvHeaderAfterPositionSkip}{.4mm}
+\newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
+\newcommand{\acvHeaderIconSep}{\space}
+\newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+\newcommand{\acvHeaderAfterSocialSkip}{6mm}
+\newcommand{\acvHeaderAfterQuoteSkip}{5mm}
+
+\newcommand{\acvSectionTopSkip}{3mm}
+\newcommand{\acvSectionContentTopSkip}{2.5mm}
+
+\newcolumntype{L}[1]{
+  >{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}
+}
+\newcolumntype{C}[1]{
+  >{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}
+}
+\newcolumntype{R}[1]{
+  >{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}
+}
+
+\def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
+
+\newcommand*{\ifempty}[3]{\ifthenelse{\isempty{#1}}{#2}{#3}}
+#+END_SRC
+
+  More document structuring commands and code....
+
+#+BEGIN_SRC latex
+\newcommand*{\makecvheader}[1][C]{
+  \newlength{\headertextwidth}
+  \newlength{\headerphotowidth}
+  \ifthenelse{\isundefined{\@photo}}{
+    \setlength{\headertextwidth}{\textwidth}
+    \setlength{\headerphotowidth}{0cm}
+  }{
+    \setlength{\headertextwidth}{0.76\textwidth}
+    \setlength{\headerphotowidth}{0.24\textwidth}
+  }
+  \begin{minipage}[c]{\headertextwidth}
+
+    \ifthenelse{\equal{#1}{L}}
+      {\raggedright}
+      {\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
+    \headerfirstnamestyle{\@firstname}
+    \headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}
+    \\[\acvHeaderAfterNameSkip]
+
+    \ifthenelse{\isundefined{\@position}}
+    {}
+    {\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}
+
+    \ifthenelse{\isundefined{\@address}}
+    {}
+    {\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}
+
+    \headersocialstyle{
+      \newbool{isstart}
+      \setbool{isstart}{true}
+      \ifthenelse{\isundefined{\@mobile}}
+      {}
+      {
+        \acvHeaderIconSep\@mobile
+        \setbool{isstart}{false}
+      }
+      \ifthenelse{\isundefined{\@homepage}}
+      {}
+      {
+        \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}
+        \href{http://\@homepage}{\acvHeaderIconSep\@homepage}
+      }
+      \ifthenelse{\isundefined{\@email}}
+      {}
+      {
+        \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}
+        \href{mailto:\@email}{\acvHeaderIconSep\@email}
+      }
+    } \\[\acvHeaderAfterSocialSkip]
+    \ifthenelse{\isundefined{\@quote}}
+    {}
+    {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}
+  \end{minipage}
+}
+
+\newcommand*{\makecvfooter}[3]{
+  \fancyfoot[C]{\footerstyle{#1 RÉSUMÉ — PAGE #2 of #3}}
+}
+#+END_SRC
+
+  Headers and footers are declared above.
+
+#+BEGIN_SRC latex
+\newcommand{\cvsection}[1]{
+  \vspace{\acvSectionTopSkip}
+  \hrule
+  \sectionstyle{#1}
+  \phantomsection{}
+}
+
+\newcommand{\cvsubsection}[1]{
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-3mm}
+  \subsectionstyle{#1}
+  \phantomsection{}
+}
+
+\newenvironment{cvparagraph}{
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-3mm}
+  \paragraphstyle{}
+}{
+  \par
+  \vspace{2mm}
+}
+
+\newenvironment{cventries}{
+  \vspace{\acvSectionContentTopSkip}
+  \begin{center}
+}{
+  \end{center}
+}
+
+\newcommand*{\cventry}[5]{
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}
+    {\textwidth}
+    {@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrytitlestyle{#1} & \entrylocationstyle{#2} \\
+    \entrypositionstyle{#3} & \entrydatestyle{#4} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+  \end{tabular*}
+}
+
+\newenvironment{cvsubentries}{
+  \begin{center}
+}{
+  \end{center}
+}
+
+\newcommand*{\cvsubentry}[4]{
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}
+    {@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \setlength\leftskip{0.2cm}
+    \subentrytitlestyle{#2} & \ifthenelse{\equal{#1}{}}
+                              {\subentrydatestyle{#3}}{}
+                              \ifthenelse{\equal{#1}{}}
+                              {}
+                              {\subentrypositionstyle{#1} & 
+                               \subentrydatestyle{#3} \\}
+    \ifthenelse{\equal{#4}{}}
+    {}
+    {\multicolumn{2}{L{17.0cm}}{\subdescriptionstyle{#4}} \\}
+  \end{tabular*}
+}
+
+\newenvironment{cvhonors}{
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \begin{center}
+    \def\arraystretch{1.5}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}
+      {@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 6.0cm} R{4.5cm}}
+}{
+    \end{tabular*}
+  \end{center}
+}
+
+\newcommand*{\cvhonor}[4]{
+  \honordatestyle{#4} & \honorpositionstyle{#1}, \honortitlestyle{#2} &   
+    \honorlocationstyle{#3} \\
+}
+
+\newenvironment{cvskills}{
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2.0mm}
+  \begin{center}
+    \setlength\tabcolsep{1ex}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}
+      {@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+}{
+    \end{tabular*}
+  \end{center}
+}
+
+\newcommand*{\cvskill}[2]{
+  \skilltypestyle{#1} & \skillsetstyle{#2} \\
+}
+
+\newenvironment{cvitems}{
+  \vspace{-4.0mm}
+  \begin{itemize}[leftmargin=2ex, rightmargin=4.5cm, nosep, noitemsep]
+    \setlength\itemsep{0.5em}
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{
+  \end{itemize}
+  \vspace{-4.0mm}
+}
+   #+END_SRC
+
+   We now have now defined all of the commands needed to build our LaTeX document.
+
+* Building it
+  :PROPERTIES:
+  :header-args: :tangle build.nix
+  :END:
+
+  Nix makes it possible to make this Résumé truly reproducible. Nix is a purely
+  functional package manager. This means that each package is defined in a
+  functional language and we have much more powerful tools at our disposal.
+
+** Installing Nix
+  :PROPERTIES:
+  :header-args: :tangle no
+  :END:
+
+   Nix can be installed on both Linux and macOS machines. Run the following and
+   follow some simple steps to get Nix working,
+
+   #+BEGIN_SRC shell
+curl https://nixos.org/nix/install | sh
+   #+END_SRC
+
+   More information on Nix is available from the Nix homepage at
+   https://nixos.org/nix/.
+
+** =build.nix=
+
+  To start, we’ll this need to pull in Nixpkgs. Nixpkgs provides a set of
+  packages for Nix to use. Because Nix is functional, we’ll make nixpkgs an
+  optional argument if we ever want to work with multiple package set versions.
+
+  #+BEGIN_SRC nix
+{nixpkgs ? import <nixpkgs> {}}:
+with nixpkgs;
+  #+END_SRC
+
+  This syntax may be a little hard to understand for users new to Nix. ={}:=
+  declares a function. This particular function will take up the entire file and
+  Nix will ~autocall~ it when no arguments are necessary. This particular
+  function has one arguments, nixpkgs, that refers to the package set being
+  used. To make things easier we provide a default after the =?= symbol.
+  =<nixpkgs>= refers to the nixpkgs channels that the user has setup. It can be
+  updated with,
+
+  #+BEGIN_SRC shell :tangle no
+nix-channel --update
+  #+END_SRC
+
+  Giving us a potentially newer version of Nixpkgs and its software to work
+  with.
+
+  Almost everything in Nix is a derivation (including Nix itself). Each
+  derivation has its own store path so we can reference it through
+
+  #+BEGIN_SRC nix
+stdenv.mkDerivation {
+  name = "resume";
+  src = ./.;
+  #+END_SRC
+
+  We’ll name this derivation resume and tell it to use the files in the current
+  directory as source.
+
+  #+BEGIN_SRC nix
+  buildInputs = [
+    (texlive.combine {
+      inherit (texlive) scheme-basic xetex xetex-def setspace fontspec
+                        chktex enumitem xifthen ifmtarg filehook
+                        upquote tools ms geometry graphics oberdiek
+                        fancyhdr lastpage xcolor etoolbox unicode-math
+                        ucharcat sourcesanspro tcolorbox pgf environ
+                        trimspaces parskip hyperref url euenc
+                        collection-fontsrecommended;
+    })
+  ];
+  #+END_SRC
+
+  Inputs in Nix are similar to dependencies in other package managers. Here, we
+  list only one dependency which provides our LaTeX distribution.
+  =texlive.combine= is a function that produces a derivation which will provide
+  the =xetex= binary. Each attribute listed in between ={= and =}= will be
+  passed as LaTeX packages to TeX Live. The =inherit= keyword tells Nix to pass
+  everything after =(texlive)= as attributes of =texlive= to =texlive.combine=.
+  Each one of those names listed should correspond to TeX Live packages that are
+  needed to build the résumé PDF.
+
+  #+BEGIN_SRC nix
+  buildPhase = ''
+    xelatex -file-line-error -interaction=nonstopmode "\input" resume.tex
+  '';
+  #+END_SRC
+
+  Here we actually build the =xelatex= file. These options make it easier to
+  debug =xelatex= when something goes wrong and makes sure we don’t get
+  =xelatex= doesn’t require any user input. It will produce a file called
+  =resume.pdf= that we can use as a résumé.
+
+  #+BEGIN_SRC nix
+  installPhase = ''
+    cp resume.pdf $out
+  '';
+  #+END_SRC
+
+  Finally, we copy this résumé to =$out= where the derivation will live.
+
+  #+BEGIN_SRC nix
+}
+  #+END_SRC
+
+** Running the build
+  :PROPERTIES:
+  :header-args: :tangle no
+  :END:
+
+   This entire document is built with ~org-mode~’s Babel engine. This means that
+   we can generate the files needed to build the résumé from scratch. To do
+   this, first we must clone this repository (if you haven’t already).
+
+   #+BEGIN_SRC shell
+git clone https://github.com/matthewbauer/resume
+cd resume
+   #+END_SRC
+
+   Next, we need to open this file in Emacs and generate the files (/tangle/ it
+   in Babel lingo). Run this now, if you haven’t already,
+
+   #+BEGIN_SRC shell
+emacs README.org
+   #+END_SRC
+
+   Finally, let’s build these files. From Emacs, type the following: =C-c C-v t=
+   (org-babel-tangle). This will take a little bit, but at the end of it you will
+   have all of the files /tangled/ inside README.org. You can build the résumé
+   with,
+
+   #+BEGIN_SRC shell
+nix-build build.nix
+   #+END_SRC
+
+* Automating it
+  :PROPERTIES:
+  :header-args: :tangle default.nix
+  :END:
+
+  Sadly, Nix does not understand raw Org mode (yet). We need a bootstrap to
+  generate a Nix script from this file to truly automate this. I’ve included it
+  here for completeness, but you’ll need to generate it first before Nix will
+  work. If you haven’t already, generate this in ~org-mode~ by moving the cursor
+  into the src block below and pressing =C-u C-c C-v t= (org-babel-tangle).
+  Alternatively, I’ve provided a pregenerated file at [[./default.nix]].
+
+  #+BEGIN_SRC nix
+{nixpkgs ? import <nixpkgs> {}}: with nixpkgs;
+let
+  #+END_SRC
+
+  Again, we’re be defining a function. Now, we will be using the let...in
+  syntax to define a derivation to use.
+
+  #+BEGIN_SRC nix
+README = stdenv.mkDerivation {
+  name = "README";
+  unpackPhase = "true";
+  buildInputs = [ emacs ];
+  installPhase = ''
+    mkdir -p $out
+    cd $out
+    cp -r ${./fonts} fonts
+    cp ${./README.org} README.org
+    emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
+  '';
+};
+  #+END_SRC
+
+  The README derivation builds all of the things contained within this
+  README.org file. Almost every code block here will make a file that we’ll feed
+  into Nix. Fonts are external to the README because they are binary and cannot
+  be put in an Org file, but you can view them in [[./fonts]].
+
+  Now, we’ll create another derivation that does some unorthodox things with
+  Nix. It might not make sense right now, but it runs the =README= derivation’s
+  =build.nix= file as its own Nix expression.
+
+  #+BEGIN_SRC nix
+in stdenv.mkDerivation {
+  #+END_SRC
+
+  /ifd/ stands for Import From Derivation. Basically, it means we import data
+  generated in one derivation, =README=, in Nix to generate another derivation.
+  This will bootstrap the [[./README.org]] and allow us to avoid generated files.
+
+  #+BEGIN_SRC nix
+  name = "ifd";
+  unpackPhase = "true";
+  #+END_SRC
+  #+BEGIN_SRC nix
+  buildInputs = [ nixStable ];
+  #+END_SRC
+  #+BEGIN_SRC nix
+  buildPhase = ''
+    export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
+    export NIX_PATH=${builtins.getEnv "NIX_PATH"}
+
+    nix-build ${README}/build.nix
+  '';
+  #+END_SRC
+
+  Here is our recursive call to Nix. It basically lets us use the Nix output of
+  README.org as an input of =nix-build=. =NIX_REMOTE= and =NIX_PATH= are set to
+  give make sure we are getting the correct values from the parent =nix-build=.
+  =nix-build= will produce a =./result= file that will contain the output from
+  the Building it section.
+
+  Disclaimer: recursive Nix is not really officially supported. See
+  https://github.com/NixOS/nix/issues/13 for discussion.
+
+  #+BEGIN_SRC nix
+  installPhase = ''
+    cp result $out
+  '';
+  #+END_SRC
+
+  Finally, we copy the output of =nix-build= into our own output so that Nix
+  will be tricked into thinking this expression actually generated.
+
+  #+BEGIN_SRC nix
+}
+  #+END_SRC
+
+  Now, we can finally build the Résumé! To do this, we just need to run
+  =nix-build= from the command line.
+
+  #+BEGIN_SRC shell :tangle no
+nix-build
+  #+END_SRC
+
+  Look at =./result= and it will be PDF file you can open.
+
+** Continous Integration
+   :PROPERTIES:
+   :header-args: :tangle .travis.yml
+   :END:
+
+   Travis makes it easy to run continuous integration on our résumé.
+
+   #+BEGIN_SRC yaml
+language: nix
+   #+END_SRC
+
+   Travis supports Nix projects out-of-the-box so all that’s really needed is the
+   above. However, matrices are useful to make sure it runs on more than one
+   machine and accross different versions.
+
+   #+BEGIN_SRC yaml
+script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}
+   #+END_SRC
+
+   This line tells Travis what to build. The ~$NIXPKGS~ variable should become
+   clear later on.
+
+   #+BEGIN_SRC yaml
+matrix:
+  include:
+    - os: linux
+      env: NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
+    - os: osx
+      env: NIXPKGS=nixos.org/channels/nixpkgs-17.09-darwin/nixexprs.tar.xz
+   #+END_SRC
+
+   This will build two résumés one on a Linux machine and one on macOS.
+
+   #+BEGIN_SRC yaml
+    - os: linux
+      env: NIXPKGS=github.com/NixOS/nixpkgs-channels/archive/nixos-17.03.tar.gz
+   #+END_SRC
+
+   To make sure our package works on older versions of Nix, I’ve added the NixOS
+   channel to give you an idea of why it would be useful to override =nixpkgs=
+   argument above.
+
+   So, using [[./.travis.yml]], you can make Travis automatically build a
+   ~resume.pdf~ every time you commit a change.
+
+* Conclusion
+
+  I welcome everyone to fork the repo containing these files,
+  https://github.com/matthewbauer/resume. You should be able to generate your
+  own Résumé by modifying the contents of Semantic info and LaTeX document. Any
+  contributions to the process of reproducible résumés are welcome and you can
+  open them as issues under that GitHub repo. Alternatively, you can email me at
+  [[mailto:mjbauer95@gmail.com]].
+

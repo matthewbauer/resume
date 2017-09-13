@@ -1,25 +1,35 @@
-{nixpkgs ? import <nixpkgs> {}}:
+{nixpkgs ? import <nixpkgs> {}}: with nixpkgs;
+let
 
-with nixpkgs;
-
-stdenv.mkDerivation {
-  name = "resume";
-  src = ./.;
-  buildInputs = [
-    (texlive.combine {
-      inherit (texlive) scheme-basic xetex xetex-def setspace fontspec
-                        chktex enumitem xifthen ifmtarg filehook
-                        upquote tools ms geometry graphics oberdiek
-                        fancyhdr lastpage xcolor etoolbox unicode-math
-                        ucharcat sourcesanspro tcolorbox pgf environ
-                        trimspaces parskip hyperref url euenc
-                        collection-fontsrecommended;
-    })
-  ];
-  buildPhase = ''
-    xelatex -file-line-error -interaction=nonstopmode "\input" resume.tex
-  '';
+README = stdenv.mkDerivation {
+  name = "README";
+  unpackPhase = "true";
+  buildInputs = [ emacs ];
   installPhase = ''
-    cp resume.pdf $out
+    mkdir -p $out
+    cd $out
+    cp -r ${./fonts} fonts
+    cp ${./README.org} README.org
+    emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
   '';
+};
+
+in stdenv.mkDerivation {
+
+  name = "ifd";
+  unpackPhase = "true";
+
+  buildInputs = [ nixStable ];
+
+  buildPhase = ''
+    export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
+    export NIX_PATH=${builtins.getEnv "NIX_PATH"}
+
+    nix-build ${README}/build.nix
+  '';
+
+  installPhase = ''
+    cp result $out
+  '';
+
 }

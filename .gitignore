@@ -6,4 +6,8 @@ auto/
 
 *.tex
 *.cls
+
 result
+resume.cls
+resume.tex
+build.nix
