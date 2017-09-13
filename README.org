@@ -958,14 +958,37 @@ script: nix-build --arg nixpkgs "builtins.fetchTarball \"$NIXPKGS\""
    clear after reading the usage below.
 
    #+BEGIN_SRC yaml
+os:
+  - linux
+  - osx
+   #+END_SRC
+
+   #+BEGIN_SRC yaml
+env:
+  - NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
+  - NIXPKGS=nixos.org/channels/nixpkgs-17.09-darwin/nixexprs.tar.xz
+  - NIXPKGS=nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+  - NIXPKGS=nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
+   #+END_SRC
+
+   #+BEGIN_SRC yaml
 matrix:
-  include:
+   #+END_SRC
+
+   #+BEGIN_SRC yaml
+  exclude:
     - os: linux
-      env: NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
-    - os: linux
-      env: NIXPKGS=nixos.org/channels/nixos-17.03/nixexprs.tar.xz
-    - os: osx
       env: NIXPKGS=nixos.org/channels/nixpkgs-17.09-darwin/nixexprs.tar.xz
+    - os: osx
+      env: NIXPKGS=nixos.org/channels/nixos-17.09/nixexprs.tar.xz
+    - os: osx
+      env: NIXPKGS=nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+   #+END_SRC
+
+   #+BEGIN_SRC yaml
+  allow_failures:
+    - env: NIXPKGS=nixos.org/channels/nixos-unstable/nixexprs.tar.xz
+    - env: NIXPKGS=nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
    #+END_SRC
 
    This will build three résumés two on Linux machine and one on macOS.
