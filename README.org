@@ -297,15 +297,20 @@ Below are some awards I’ve received.
      #+END_SRC
 
 ** Styling
-   :PROPERTIES:
-   :header-args: :tangle resume.cls
-   :END:
-
    Styling LaTeX can get a little difficult so I’ve based mine off of
    @posquit0’s Awesome-CV. This template provided most of what you’ll see below.
 
    In addition, I’ve followed some of Matthew Butterick’s guide on résumés. You
    can read about it at http://practicaltypography.com/resumes.html.
+
+   I’ve provided an example styling that you can access at [[./resume.cls]]. It’s
+   pretty basic but you can use it as a clean résumé style.
+** =resume.cls=                                                    :noexport:
+   :PROPERTIES:
+   :header-args: :tangle resume.cls
+   :END:
+
+   This is not exported because it’s kind of too long for a blog post.
 
    #+BEGIN_SRC latex
 \ProvidesClass{resume}[2017/08/01 Resume Class]
