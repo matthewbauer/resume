@@ -9,31 +9,24 @@
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
 #+LATEX_HEADER: \usepackage{alltt}
 #+LATEX_HEADER: \usepackage{upquote}
-#+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline path:http://orgmode.org/org-info.js
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css"/>
-* Intro
+#+INFOJS_OPT: view:showall toc:nil ltoc:nil mouse:underline path:http://orgmode.org/org-info.js
 
-  Recently, ‘reproducible’ papers have become popular in Academia. The idea is
-  to make all of the data and code available for researchers to reproduce the
-  findings of the paper in an accessible location. It makes more sense in
-  computer science contexts than others but the basic idea can be applied
-  everywhere. Technologies like org-mode’s literate programming engine, Babel
-  and Nix, the functional package manager, make this kind of thing very easy to
-  do.
+Recently, ‘reproducible’ papers have become popular in Academia. The idea is to
+make all of the data and code available for researchers to reproduce the
+findings of the paper in an accessible location. It makes more sense in computer
+science contexts than others but the basic idea can be applied everywhere.
+Technologies like org-mode’s literate programming engine, Babel and Nix, the
+functional package manager, make this kind of thing very easy to do.
 
-  This idea hasn’t seen wide used in industry, however. That’s a shame because I
-  find it to be extremely useful in any kind of software projects.
+This idea hasn’t seen wide used in industry, however. That’s a shame because I
+find it to be extremely useful in any kind of software projects. To make this
+idea more accessible for those outside Academia, I’m going to lay out how to
+apply this to something everyone needs when applying for a job, a résumé. This
+document will be all that is needed to generate my résumé. With some minor
+adjustments it can be used by others.
 
-  To make this more accessible for those outside Academia, I’m going to lay out
-  how to apply this to something everyone needs when applying for a job, a
-  résumé. This document will be all that is needed to generate my résumé. With
-  some minor adjustments it can be used by others.
-
-  At the end of this guide, you should be able to produce a PDF résume that can
-  be sent to employers.
-
-  Information on reproducible research is available at
-  http://reproducibleresearch.net.
+At the end of this guide, you should be able to produce a PDF résume that can
+be sent to employers.
 
 * The Résumé
   :PROPERTIES:
@@ -44,55 +37,41 @@
   typesetting features that can generate PDFs. Some of the syntax is scary to
   the unexperienced but I’ve tried to keep it as simple as possible.
 
-** Headers
+  LaTeX syntax can be a little confuging at first but basically everything is
+  made up of *commands*. Each command starts with a =\= followed by a command
+  name. Each command can take a variable number of arguments and they are
+  specified with ={= and =}=. LaTeX is made up a series of packages that provide
+  these commands and do most of the work of typography automatically.
 
-  Set the document class for this document. This will store the LaTeX styling
-  while the rest of this document will contain actual content of my Résumé.
+** Header
+
+  Every LaTeX document has a document class. For this document, I will use a
+  custom *resume* class.
 
   #+BEGIN_SRC latex
 \documentclass[11pt]{resume}
   #+END_SRC
 
-** Semantic info
-   Next, I’ll provide some semantic information.
+   Next, I’ll provide some semantic information. Each of these commands is
+   defined in the résumé class. You can make your own commands but I’ve tried to
+   make this document as simple as possible
 
-*** Name
-    Name commands works first, then last.
+   All of the following elements correspond to my name, address, mobile, email
+   and homepage. The contents are not parsed by LaTeX so you could put anything
+   here, but you should aim to make each command as semantic as possible.
+
+   My personal info follows,
 
    #+BEGIN_SRC latex
 \name{Matthew}{Bauer}
-   #+END_SRC
-
-*** Address
-    Now add a postal address,
-
-   #+BEGIN_SRC latex
 \address{10118 GARNETT ST, OVERLAND PARK KS 66214}
-   #+END_SRC
-
-*** Mobile
-   And mobile number,
-
-   #+BEGIN_SRC latex
 \mobile{(913) 671 0636}
-   #+END_SRC
-
-*** Email 
-
-   #+BEGIN_SRC latex
 \email{mjbauer95@gmail.com}
-   #+END_SRC
-
-*** Homepage
-   #+BEGIN_SRC latex
 \homepage{www.matthewbauer.us}
-
    #+END_SRC
 
-** LaTeX Document
-
-   This begins the document. The command =makecvheader= will setup the basic
-   template.
+   This begins the document. The command =makecvheader= is from resume.cls and
+   will setup the basic template.
 
   #+BEGIN_SRC latex
 \begin{document}
@@ -100,13 +79,15 @@
 \makecvheader[C]
   #+END_SRC
 
-  Everything that follows is personal info, but the ideas should be fairly self-explanatory.
+  Everything that follows is my own résume, but the ideas should be fairly self-explanatory.
 
-*** Education
+** Education
 
-  Each =cvsection= is separated by a horizontal line.
+  This LaTeX class defines =\cvsection= to separate sections of the résumé by a
+  horizontal line and some blank space. The only argument for =\cvsection= sets
+  the contents of the section header.
 
-  I’ll start with ‘Eduction’.
+  I start my résume with the ‘Eduction’ section.
 
   #+BEGIN_SRC latex
 \cvsection{Education}
@@ -114,10 +95,7 @@
 \begin{cventries}
   #+END_SRC
 
-  Each =cvsection= is composed of multiple
-
-  The education section provides some basic info on my education history. I only
-  have one entry for education.
+  Each =cvsection= is composed of multiple =cventries=.
 
   #+BEGIN_SRC latex
 \cventry
@@ -160,19 +138,16 @@
 \end{cventries}
   #+END_SRC
 
-*** Work experience
-
   The next section has work experience. It follows the same pattern outlined in
   the Education section.
 
-**** Header
+** Work Experience
+
   #+BEGIN_SRC latex
 \cvsection{Work Experience}
 
 \begin{cventries}
   #+END_SRC
-
-**** Amazon
 
   #+BEGIN_SRC latex
 \cventry
@@ -191,8 +166,6 @@
     \end{cvitems}
   }
   #+END_SRC
-
-**** Lexmark
 
   #+BEGIN_SRC latex
 \cventry
@@ -213,8 +186,6 @@
   }
   #+END_SRC
 
-**** Together+Clinic
-
   #+BEGIN_SRC latex
 \cventry
   {Together+Clinic}
@@ -231,10 +202,7 @@
         focused design }
     \end{cvitems}
   }
-
   #+END_SRC
-
-**** Footer
 
   Here we end =cventries=.
 
@@ -242,17 +210,14 @@
 \end{cventries}
   #+END_SRC
 
-*** Honor & Awards
+** Honors & Awards
 
-Below are some awards I’ve received.
+     Again we must define a new section, this time for honors and awards.
 
-**** Header
   #+BEGIN_SRC latex
 \cvsection{Honors \& Awards}
 \begin{cvhonors}
   #+END_SRC
-
-**** Jayhacks
 
   #+BEGIN_SRC latex
   \cvhonor
@@ -262,8 +227,6 @@ Below are some awards I’ve received.
   {2017}
   #+END_SRC
 
-**** Google Code-in
-
   #+BEGIN_SRC latex
   \cvhonor
   {Grand Prize}
@@ -272,31 +235,35 @@ Below are some awards I’ve received.
   {2013}
   #+END_SRC
 
-***** Footer
-
-   #+BEGIN_SRC latex
+  #+BEGIN_SRC latex
 \end{cvhonors}
-   #+END_SRC
+  #+END_SRC
 
-**** Footer
+** Footer
 
-     The =makecvfooter= command gives a nice footer that will be put at the
-     bottom of each page. This can give us the document title and page numbering.
-     In addition, the LastPage command will tell us how many pages there are in
-     case we misplace a page while printing.
+ The =makecvfooter= command gives a nice footer that will be put at the bottom
+ of each page. This can give us the document title and page numbering. In
+ addition, the LastPage command will tell us how many pages there are in case
+ we misplace a page while printing.
 
-     #+BEGIN_SRC latex
+    #+BEGIN_SRC latex
 \makecvfooter
 {BAUER}
 {\thepage}
 {\pageref{LastPage}}
-     #+END_SRC
+    #+END_SRC
 
-     #+BEGIN_SRC latex
+    #+BEGIN_SRC latex
 \end{document}
-     #+END_SRC
+    #+END_SRC
 
-** Styling
+** =resume.cls=                                                    :noexport:
+   :PROPERTIES:
+   :header-args: :tangle resume.cls
+   :END:
+
+   This is not exported because it’s kind of too long for a blog post.
+
    Styling LaTeX can get a little difficult so I’ve based mine off of
    @posquit0’s Awesome-CV. This template provided most of what you’ll see below.
 
@@ -305,12 +272,6 @@ Below are some awards I’ve received.
 
    I’ve provided an example styling that you can access at [[./resume.cls]]. It’s
    pretty basic but you can use it as a clean résumé style.
-** =resume.cls=                                                    :noexport:
-   :PROPERTIES:
-   :header-args: :tangle resume.cls
-   :END:
-
-   This is not exported because it’s kind of too long for a blog post.
 
    #+BEGIN_SRC latex
 \ProvidesClass{resume}[2017/08/01 Resume Class]
@@ -736,33 +697,28 @@ Below are some awards I’ve received.
 
 * Building it
   :PROPERTIES:
-  :header-args: :tangle build.nix
+  :header-args: :tangle resume.nix
   :END:
 
   Nix makes it possible to make this Résumé truly reproducible. Nix is a purely
   functional package manager. This means that each package is defined in a
   functional language and we have much more powerful tools at our disposal.
 
-** Installing Nix
-  :PROPERTIES:
-  :header-args: :tangle no
-  :END:
+  Nix can be installed on both Linux and macOS machines. It is fairly easy to
+  setup, provided you have *sudo* access. Run the following and follow some
+  simple steps to get Nix working,
 
-   Nix can be installed on both Linux and macOS machines. Run the following and
-   follow some simple steps to get Nix working,
-
-   #+BEGIN_SRC shell
+  #+BEGIN_SRC shell :tangle no
 curl https://nixos.org/nix/install | sh
-   #+END_SRC
+  #+END_SRC
 
-   More information on Nix is available from the Nix homepage at
-   https://nixos.org/nix/.
+  More information on Nix is available from the [[https://nixos.org/nix/][Nix homepage]]. On [[=resume.nix=][the next page]], I’ll explain
+  how build this résumé using Nix.
 
-** =build.nix=
-
-  To start, we’ll this need to pull in Nixpkgs. Nixpkgs provides a set of
-  packages for Nix to use. Because Nix is functional, we’ll make nixpkgs an
-  optional argument if we ever want to work with multiple package set versions.
+** =resume.nix=
+   To start, we’ll this need to pull in Nixpkgs. Nixpkgs provides a set of
+   packages for Nix to use. Because Nix is functional, we’ll make nixpkgs an
+   optional argument if we ever want to work with multiple package set versions.
 
   #+BEGIN_SRC nix
 {nixpkgs ? <nixpkgs>}: with import nixpkgs {};
@@ -818,6 +774,9 @@ stdenv.mkDerivation {
   Each one of those names listed should correspond to TeX Live packages that are
   needed to build the résumé PDF.
 
+  In the future, I’d like to get Tex Live to actually recognize the packages we
+  are using within LaTeX, but nothing seems to exist to do this.
+
   #+BEGIN_SRC nix
   buildPhase = ''
     xelatex -file-line-error -interaction=nonstopmode "\input" resume.tex
@@ -868,7 +827,7 @@ emacs README.org
    with,
 
    #+BEGIN_SRC shell
-nix-build build.nix
+nix-build resume.nix
    #+END_SRC
 
 * Automating it
@@ -902,7 +861,7 @@ README = stdenv.mkDerivation {
     cp -r ${./fonts} fonts
     cp ${./README.org} README.org
     emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
-    cp build.nix default.nix
+    cp resume.nix default.nix
   '';
 };
   #+END_SRC
@@ -915,7 +874,7 @@ README = stdenv.mkDerivation {
   Now, we’ll create another derivation with Nix. This will utilize a little
   known feature of Nix called IFD.
   It might not make sense right now, but it runs the =README= derivation’s
-  =build.nix= file as its own Nix expression.
+  =resume.nix= file as its own Nix expression.
 
   /IFD/ stands for Import From Derivation. Basically, it means we can import
   data generated in one derivation, =README=, in Nix to generate another
@@ -1023,15 +982,24 @@ matrix:
 
    This will end up building five résumés three on Linux machines and two on
    macOS machines. So, using [[./.travis.yml]], you can make Travis automatically
-   build a ~resume.pdf~ every time you commit a change. You can see the output
-   of my Travis repo, here: https://travis-ci.org/matthewbauer/resume.
+   build a ~resume.pdf~ every time you commit a change. You should be able to
+   set this up yourself but alternatively you can look at [[https://travis-ci.org/matthewbauer/resume][my Travis dashboard]].
 
 * Conclusion
+  More information on reproducible research is available at [[https://reproducibleresearch.net][Reproducible
+  Research]]. My hope is that eventually more things will become ‘reproducible’.
+  Technologies like Nix and Babel make this fairly easy but they have not yet
+  entered into the average Software Developer’s toolbelt. Reproducible projects
+  may take longer to setup, but they lead to more robust software systems.
+  
+  Résumé require a careful mix of informative content and flashy styling. Too much
+  information and employers will be overwhelmed but too little and employers
+  assume you are inexperienced. Likewise, . Perhaps eventually, software companies will read
+  through résumés in org-mode instead of PDFs, but alas Silicon Valley has not
+  yet reached this level of Nirvana.
 
-  I welcome everyone to fork the repo containing these files,
-  https://github.com/matthewbauer/resume. You should be able to generate your
-  own Résumé by modifying the contents of Semantic info and LaTeX document. Any
-  contributions to the process of reproducible résumés are welcome and you can
-  open them as issues under that GitHub repo. Alternatively, you can email me at
-  [[mailto:mjbauer95@gmail.com]].
-
+  I welcome everyone to fork [[https://github.com/matthewbauer/resume][the repo]] containing these files. You should be able
+  to generate your own Résumé by modifying the contents of Semantic info and
+  LaTeX document. Any contributions to the process of reproducible résumés are
+  welcome and you can open them as issues under that GitHub repo. Alternatively,
+  you can email me at [[mailto:mjbauer95@gmail.com][mjbauer95@gmail.com]].

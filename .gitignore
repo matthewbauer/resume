@@ -7,3 +7,6 @@ auto/
 result
 resume.tex
 build.nix
+
+README.tex
+README.html
