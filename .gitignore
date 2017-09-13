@@ -3,3 +3,7 @@
 *.aux
 *.out
 auto/
+
+*.tex
+*.cls
+result
