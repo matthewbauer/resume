@@ -3,6 +3,7 @@
 #+EMAIL: mjbauer95@gmail.com
 #+LANGUAGE: en
 #+BABEL: :cache yes
+#+OPTIONS: H:2
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{inconsolata}
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
