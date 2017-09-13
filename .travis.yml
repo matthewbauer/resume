@@ -1,6 +1,6 @@
 language: nix
 
-script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}"
+script: nix-build --arg nixpkgs "builtins.fetchTarball \"$NIXPKGS\""
 
 matrix:
   include:

@@ -10,6 +10,7 @@
 #+LATEX_HEADER: \usepackage{alltt}
 #+LATEX_HEADER: \usepackage{upquote}
 #+INFOJS_OPT: view:showall toc:t ltoc:t mouse:underline path:http://orgmode.org/org-info.js
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css"/>
 * Intro
 
   Recently, ‘reproducible’ papers have become popular in Academia. The idea is
@@ -759,8 +760,7 @@ curl https://nixos.org/nix/install | sh
   optional argument if we ever want to work with multiple package set versions.
 
   #+BEGIN_SRC nix
-{nixpkgs ? import <nixpkgs> {}}:
-with nixpkgs;
+{nixpkgs ? <nixpkgs>}: with import nixpkgs {};
   #+END_SRC
 
   This syntax may be a little hard to understand for users new to Nix. ={}:=
@@ -879,7 +879,7 @@ nix-build build.nix
   Alternatively, I’ve provided a pregenerated file at [[./default.nix]].
 
   #+BEGIN_SRC nix
-{nixpkgs ? import <nixpkgs> {}}: with nixpkgs;
+{nixpkgs ? <nixpkgs>}: with import nixpkgs {};
 let
   #+END_SRC
 
@@ -928,7 +928,7 @@ in stdenv.mkDerivation {
   #+BEGIN_SRC nix
   buildPhase = ''
     export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    nix-build ${README}/build.nix --arg nixpkgs "import ${nixpkgs} {}"
+    nix-build ${README}/build.nix --argstr nixpkgs ${nixpkgs}
   '';
   #+END_SRC
 
@@ -979,7 +979,7 @@ language: nix
    machine and accross different versions.
 
    #+BEGIN_SRC yaml
-script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}"
+script: nix-build --arg nixpkgs "builtins.fetchTarball \"$NIXPKGS\""
    #+END_SRC
 
    This line tells Travis what to build. The ~$NIXPKGS~ variable should become

@@ -1,4 +1,4 @@
-{nixpkgs ? import <nixpkgs> {}}: with nixpkgs;
+{nixpkgs ? <nixpkgs>}: with import nixpkgs {};
 let
 
 README = stdenv.mkDerivation {
@@ -23,7 +23,7 @@ in stdenv.mkDerivation {
 
   buildPhase = ''
     export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    nix-build ${README}/build.nix --arg nixpkgs "import ${nixpkgs} {}"
+    nix-build ${README}/build.nix --argstr nixpkgs ${nixpkgs}
   '';
 
   installPhase = ''
