@@ -957,11 +957,26 @@ script: nix-build --arg nixpkgs "builtins.fetchTarball \"$NIXPKGS\""
    This line tells Travis what to build. The ~$NIXPKGS~ variable should become
    clear after reading the usage below.
 
+   We want to target Linux and macOS. This will make sure the build script is
+   portable. Unfortunately, Nix does not support Windows systems and Travis does
+   not support any BSDs.
+
    #+BEGIN_SRC yaml
 os:
   - linux
   - osx
    #+END_SRC
+
+   Each value of =NIXPKGS= corresponds to a tarball release of Nixpkgs. This
+   means that we can avoid problems that arise when the Nixpkgs repo is broken.
+   Any URL to a tarball with a Nixpkgs set will work, but in Nix we call these
+   ‘channels’. Each channel has a set of tests that are required to run before a
+   new release of the channel. You could actually point directly to Nixpkgs HEAD
+   at https://github.com/nixos/nixpkgs/archive/master.tar.gz but this would
+   constantly break and you would have to frequently rebuild whole packages when
+   you could just let Hydra do it for you. You can find a whole listing at
+   https://nixos.org/channels but I have only included the latest channels
+   below.
 
    #+BEGIN_SRC yaml
 env:
@@ -971,9 +986,16 @@ env:
   - NIXPKGS=nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
    #+END_SRC
 
+   Travis works with ‘matrices’ meaning that every attribute of one property
+   (os) will get crossed with another property (env). We need to modify some of
+   these to get a working matrix.
+
    #+BEGIN_SRC yaml
 matrix:
    #+END_SRC
+
+   We exclude some (os, env) pairs here. It doesn’t really make sense to use a
+   Darwin channel on Linux or a NixOS channel on macOS.
 
    #+BEGIN_SRC yaml
   exclude:
@@ -985,20 +1007,19 @@ matrix:
       env: NIXPKGS=nixos.org/channels/nixos-unstable/nixexprs.tar.xz
    #+END_SRC
 
+  We allow some failure for unstable branches. We don’t expect stable releases
+  to always work.
+
    #+BEGIN_SRC yaml
   allow_failures:
     - env: NIXPKGS=nixos.org/channels/nixos-unstable/nixexprs.tar.xz
     - env: NIXPKGS=nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz
    #+END_SRC
 
-   This will build three résumés two on Linux machine and one on macOS.
-
-   To make sure our package works on older versions of Nix, I’ve added the NixOS
-   channel to give you an idea of why it would be useful to override =nixpkgs=
-   argument above.
-
-   So, using [[./.travis.yml]], you can make Travis automatically build a
-   ~resume.pdf~ every time you commit a change.
+   This will end up building five résumés three on Linux machines and two on
+   macOS machines. So, using [[./.travis.yml]], you can make Travis automatically
+   build a ~resume.pdf~ every time you commit a change. You can see the output
+   of my Travis repo, here: https://travis-ci.org/matthewbauer/resume.
 
 * Conclusion
 
