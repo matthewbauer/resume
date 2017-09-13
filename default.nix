@@ -11,23 +11,8 @@ README = stdenv.mkDerivation {
     cp -r ${./fonts} fonts
     cp ${./README.org} README.org
     emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
+    cp build.nix default.nix
   '';
 };
 
-in stdenv.mkDerivation {
-
-  name = "ifd";
-  unpackPhase = "true";
-
-  buildInputs = [ nixStable ];
-
-  buildPhase = ''
-    export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    nix-build ${README}/build.nix --argstr nixpkgs ${nixpkgs}
-  '';
-
-  installPhase = ''
-    cp result $out
-  '';
-
-}
+in import README {inherit nixpkgs;}

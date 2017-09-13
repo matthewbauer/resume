@@ -897,6 +897,7 @@ README = stdenv.mkDerivation {
     cp -r ${./fonts} fonts
     cp ${./README.org} README.org
     emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
+    cp build.nix default.nix
   '';
 };
   #+END_SRC
@@ -906,53 +907,24 @@ README = stdenv.mkDerivation {
   into Nix. Fonts are external to the README because they are binary and cannot
   be put in an Org file, but you can view them in [[./fonts]].
 
-  Now, we’ll create another derivation that does some unorthodox things with
-  Nix. It might not make sense right now, but it runs the =README= derivation’s
+  Now, we’ll create another derivation with Nix. This will utilize a little
+  known feature of Nix called IFD.
+  It might not make sense right now, but it runs the =README= derivation’s
   =build.nix= file as its own Nix expression.
 
-  #+BEGIN_SRC nix
-in stdenv.mkDerivation {
-  #+END_SRC
-
-  /ifd/ stands for Import From Derivation. Basically, it means we import data
-  generated in one derivation, =README=, in Nix to generate another derivation.
-  This will bootstrap the [[./README.org]] and allow us to avoid generated files.
+  /IFD/ stands for Import From Derivation. Basically, it means we can import
+  data generated in one derivation, =README=, in Nix to generate another
+  derivation. This will bootstrap the [[./README.org]] and allow us to avoid
+  generated files.
 
   #+BEGIN_SRC nix
-  name = "ifd";
-  unpackPhase = "true";
-  #+END_SRC
-  #+BEGIN_SRC nix
-  buildInputs = [ nixStable ];
-  #+END_SRC
-  #+BEGIN_SRC nix
-  buildPhase = ''
-    export NIX_REMOTE=${builtins.getEnv "NIX_REMOTE"}
-    nix-build ${README}/build.nix --argstr nixpkgs ${nixpkgs}
-  '';
+in import README {inherit nixpkgs;}
   #+END_SRC
 
-  Here is our recursive call to Nix. It basically lets us use the Nix output of
-  README.org as an input of =nix-build=. =NIX_REMOTE= and =NIX_PATH= are set to
-  give make sure we are getting the correct values from the parent =nix-build=.
-  =nix-build= will produce a =./result= file that will contain the output from
-  the Building it section.
-
-  Disclaimer: recursive Nix is not really officially supported. See
-  https://github.com/NixOS/nix/issues/13 for discussion.
-
-  #+BEGIN_SRC nix
-  installPhase = ''
-    cp result $out
-  '';
-  #+END_SRC
-
-  Finally, we copy the output of =nix-build= into our own output so that Nix
-  will be tricked into thinking this expression actually generated.
-
-  #+BEGIN_SRC nix
-}
-  #+END_SRC
+  This can be thought of as a recursive call to Nix. It basically lets us use
+  the Nix output of README.org as an input for Nix. The derivation will produce
+  a =./result= file that will contain the output of =build.nix= for the Building
+  it section.
 
   Now, we can finally build the Résumé! To do this, we just need to run
   =nix-build= from the command line.
