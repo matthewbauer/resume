@@ -6,6 +6,7 @@ auto/
 
 result
 resume.tex
+resume.nix
 build.nix
 
 README.tex

@@ -11,7 +11,7 @@ README = stdenv.mkDerivation {
     cp -r ${./fonts} fonts
     cp ${./README.org} README.org
     emacs --batch -l ob-tangle --eval "(org-babel-tangle-file \"README.org\")"
-    cp build.nix default.nix
+    cp resume.nix default.nix
   '';
 };
 
