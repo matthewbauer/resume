@@ -974,12 +974,12 @@ nix-build
 language: nix
    #+END_SRC
 
-   Travis supports Nix projects out-of-the-box so all that’s really needed is the
-   above. However, matrices are useful to make sure it runs on more than one
+   Travis supports Nix projects out-of-the-box so all that’s really needed is
+   the above. However, matrices are useful to make sure it runs on more than one
    machine and accross different versions.
 
    #+BEGIN_SRC yaml
-script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}
+script: nix-build --arg nixpkgs "import (builtins.fetchTarball \"$NIXPKGS\") {}"
    #+END_SRC
 
    This line tells Travis what to build. The ~$NIXPKGS~ variable should become
