@@ -940,11 +940,10 @@ os:
    Any URL to a tarball with a Nixpkgs set will work, but in Nix we call these
    ‘channels’. Each channel has a set of tests that are required to run before a
    new release of the channel. You could actually point directly to Nixpkgs HEAD
-   at https://github.com/nixos/nixpkgs/archive/master.tar.gz but this would
-   constantly break and you would have to frequently rebuild whole packages when
-   you could just let Hydra do it for you. You can find a whole listing at
-   https://nixos.org/channels but I have only included the latest channels
-   below.
+   using [[https://github.com/nixos/nixpkgs/archive/master.tar.gz][GitHub’s archive URL]] but this would constantly break as you would
+   frequently have to rebuild whole packages when you could just let Hydra do it
+   for you. You can find a whole listing at [[https://nixos.org/channels][NixOS.org]] but I have included
+   the most recent channels below.
 
    #+BEGIN_SRC yaml
 env:
