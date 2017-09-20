@@ -10,23 +10,23 @@
 #+LATEX_HEADER: \usepackage{alltt}
 #+LATEX_HEADER: \usepackage{upquote}
 #+INFOJS_OPT: view:showall toc:nil ltoc:nil mouse:underline path:http://orgmode.org/org-info.js
+#+HTML_HEAD: <link rel="stylesheet" href="https://matthewbauer.us/style.css"/>
 
 Recently, ‘reproducible’ papers have become popular in Academia. The idea is to
-make all of the data and code available for researchers to reproduce the
-findings of the paper in an accessible location. It makes more sense in computer
-science contexts than others but the basic idea can be applied everywhere.
-Technologies like org-mode’s literate programming engine, Babel and Nix, the
-functional package manager, make this kind of thing very easy to do.
+make all of the data and code available so that finding can be reproduced in an
+accessible way. Technologies like org-mode’s literate programming engine, Babel
+and Nix, the functional package manager, make this kind of thing very easy to
+do.
 
-This idea hasn’t seen wide used in industry, however. That’s a shame because I
-find it to be extremely useful in any kind of software projects. To make this
-idea more accessible for those outside Academia, I’m going to lay out how to
-apply this to something everyone needs when applying for a job, a résumé. This
-document will be all that is needed to generate my résumé. With some minor
-adjustments it can be used by others.
+This idea hasn’t seen wide used in outside Academia, however. That’s a shame
+because I find it to be extremely useful in any kind of software projects. To
+make this idea more accessible for those outside Academia, I’m going to lay out
+how to apply this to something everyone needs when applying for a job, a résumé.
+This document will be all that is needed to generate my résumé. With some minor
+adjustments you can use it to generate your own.
 
-At the end of this guide, you should be able to produce a PDF résume that can
-be sent to employers.
+At the end of this guide, you should have all of the information needed produce
+a PDF version of your résume.
 
 * The Résumé
   :PROPERTIES:
@@ -34,8 +34,8 @@ be sent to employers.
   :END:
 
   LaTeX makes it very easy to generate Résumés. It provides extremely powerful
-  typesetting features that can generate PDFs. Some of the syntax is scary to
-  the unexperienced but I’ve tried to keep it as simple as possible.
+  typesetting features and can output PDF. Some of the syntax is scary to the
+  unexperienced but I’ve tried to keep it as simple as possible.
 
   LaTeX syntax can be a little confuging at first but basically everything is
   made up of *commands*. Each command starts with a =\= followed by a command
@@ -43,235 +43,25 @@ be sent to employers.
   specified with ={= and =}=. LaTeX is made up a series of packages that provide
   these commands and do most of the work of typography automatically.
 
-** Header
+** Document class
 
-  Every LaTeX document has a document class. For this document, I will use a
-  custom *resume* class.
+   Every LaTeX document has a document class. Think of it like the CSS to the
+   Résumé’s HTML. Classes tells LaTeX how to layout the document and there are a
+   few builtin ones like ‘article’ that work fairly well for basic document.
+   I’ve built up my own class that works well for résumés. It’s largely based
+   off of @posquit0’s Awesome-CV but with some minor adjustments to make it a
+   little cleaner. In addition, I’ve followed some of Matthew Butterick’s guide
+   on résumés. You can read about them at [[http://practicaltypography.com/resumes.html][Practical Typography]].
 
-  #+BEGIN_SRC latex
-\documentclass[11pt]{resume}
-  #+END_SRC
+   I’ve make it available at [[./resume.cls][resume.cls]] of this repo’s root but I won’t include
+   it in this blog post (but it’s still in the [[./README.org]] file).
 
-   Next, I’ll provide some semantic information. Each of these commands is
-   defined in the résumé class. You can make your own commands but I’ve tried to
-   make this document as simple as possible
-
-   All of the following elements correspond to my name, address, mobile, email
-   and homepage. The contents are not parsed by LaTeX so you could put anything
-   here, but you should aim to make each command as semantic as possible.
-
-   My personal info follows,
-
-   #+BEGIN_SRC latex
-\name{Matthew}{Bauer}
-\address{10118 GARNETT ST, OVERLAND PARK KS 66214}
-\mobile{(913) 671 0636}
-\email{mjbauer95@gmail.com}
-\homepage{www.matthewbauer.us}
-   #+END_SRC
-
-   This begins the document. The command =makecvheader= is from resume.cls and
-   will setup the basic template.
-
-  #+BEGIN_SRC latex
-\begin{document}
-
-\makecvheader[C]
-  #+END_SRC
-
-  Everything that follows is my own résume, but the ideas should be fairly self-explanatory.
-
-** Education
-
-  This LaTeX class defines =\cvsection= to separate sections of the résumé by a
-  horizontal line and some blank space. The only argument for =\cvsection= sets
-  the contents of the section header.
-
-  I start my résume with the ‘Eduction’ section.
-
-  #+BEGIN_SRC latex
-\cvsection{Education}
-
-\begin{cventries}
-  #+END_SRC
-
-  Each =cvsection= is composed of multiple =cventries=.
-
-  #+BEGIN_SRC latex
-\cventry
-  {University of Kansas}
-  {Lawrence, KS, USA}
-  {B.S. in Computer Science, 3.4 GPA}
-  {Aug. 2015 – Exp. Dec. 2018}
-  {
-    \begin{cvitems}
-    \item { Participated in ACM and hackathon competitions }
-    \item { Coursework includes Software Engineering, Programming Languages,
-        and Communication Networks }
-    \end{cvitems}
-  }
-  #+END_SRC
-
-  =cventry= can be though of as a function that takes a variable 5 arguments.
-  The first will be the heading used. The second will be on the right-hand side
-  in /italics/. The third will be in /italics/ immediately below the first. The
-  fourth will be on the right-hand side of the third argument. The last argument
-  provides items for the entry.
-
-  For my résumé, I have chosen to use each of these arguments for certain
-  purposes. It’s not necessary to do the same, but you should use a consistent
-  style throughout your résumé.
-
-  | left         | right        |
-  |--------------+--------------|
-  | argument 1   | /argument 2/ |
-  | /argument 3/ | /argument 4/ |
-
-  For me, they correspond to,
-
-  | left                  | right                   |
-  |-----------------------+-------------------------|
-  | Company or University | /Location/              |
-  | /Position or degree/  | /Start date - end date/ |
-
-  #+BEGIN_SRC latex
-\end{cventries}
-  #+END_SRC
-
-  The next section has work experience. It follows the same pattern outlined in
-  the Education section.
-
-** Work Experience
-
-  #+BEGIN_SRC latex
-\cvsection{Work Experience}
-
-\begin{cventries}
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-\cventry
-  {Amazon.com, Inc.}
-  {Seattle, WA, USA}
-  {SDE Intern}
-  {Summer 2017}
-  {
-    \begin{cvitems}
-    \item { Worked on Mobile Identity team which manages the login screens for
-            Amazon apps }
-    \item { Project made it easier for teams to register new devices through
-            Identity Services }
-    \item { Used Agile development principles in design and development of
-            project }
-    \end{cvitems}
-  }
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-\cventry
-  {Lexmark Enterprise Software}
-  {Lenexa, KS, USA}
-  {Software Engineer Intern}
-  {Summer 2015, Summer 2016}
-  {
-    \begin{cvitems}
-    \item { Worked on the Client Architecture team which builds the JavaScript
-        web framework which other teams use to build enterprise solutions }
-    \item { Participated in high level design decision conversations }
-    \item { Project moved the web framework away from in-house solutions to
-        better maintained open source projects while preserving legacy
-        compatibility }
-    \item { Asked to return after impressive first year }
-    \end{cvitems}
-  }
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-\cventry
-  {Together+Clinic}
-  {Lincoln, NE, USA}
-  {Design Studio Intern}
-  {Spring 2015}
-  {
-    \begin{cvitems}
-    \item { Startup building web app to let doctors track patients recovering
-        from surgery without frequent checkup visits }
-    \item { The web interface is used by both patients to record progress and
-        doctors to track progress }
-    \item { Team used Scrum development principles for quick response and user
-        focused design }
-    \end{cvitems}
-  }
-  #+END_SRC
-
-  Here we end =cventries=.
-
-  #+BEGIN_SRC latex
-\end{cventries}
-  #+END_SRC
-
-** Honors & Awards
-
-     Again we must define a new section, this time for honors and awards.
-
-  #+BEGIN_SRC latex
-\cvsection{Honors \& Awards}
-\begin{cvhonors}
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-  \cvhonor
-  {3rd Place}
-  {JayHacks Hackathon}
-  {Lawrence, KS, USA}
-  {2017}
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-  \cvhonor
-  {Grand Prize}
-  {Google Code-in}
-  {Mountain View, CA, USA}
-  {2013}
-  #+END_SRC
-
-  #+BEGIN_SRC latex
-\end{cvhonors}
-  #+END_SRC
-
-** Footer
-
- The =makecvfooter= command gives a nice footer that will be put at the bottom
- of each page. This can give us the document title and page numbering. In
- addition, the LastPage command will tell us how many pages there are in case
- we misplace a page while printing.
-
-    #+BEGIN_SRC latex
-\makecvfooter
-{BAUER}
-{\thepage}
-{\pageref{LastPage}}
-    #+END_SRC
-
-    #+BEGIN_SRC latex
-\end{document}
-    #+END_SRC
-
-** =resume.cls=                                                    :noexport:
+*** =resume.cls=                                                   :noexport:
    :PROPERTIES:
    :header-args: :tangle resume.cls
    :END:
 
    This is not exported because it’s kind of too long for a blog post.
-
-   Styling LaTeX can get a little difficult so I’ve based mine off of
-   @posquit0’s Awesome-CV. This template provided most of what you’ll see below.
-
-   In addition, I’ve followed some of Matthew Butterick’s guide on résumés. You
-   can read about it at http://practicaltypography.com/resumes.html.
-
-   I’ve provided an example styling that you can access at [[./resume.cls]]. It’s
-   pretty basic but you can use it as a clean résumé style.
 
    #+BEGIN_SRC latex
 \ProvidesClass{resume}[2017/08/01 Resume Class]
@@ -695,6 +485,220 @@ be sent to employers.
 
    We now have now defined all of the commands needed to build our LaTeX document.
 
+** Header
+
+  Every LaTeX document has a document class. For this document, I will use a
+  custom *resume* class.
+
+  #+BEGIN_SRC latex
+\documentclass[11pt]{resume}
+  #+END_SRC
+
+   Next, I’ll provide some semantic information. Each of these commands is
+   defined in the résumé class. You can make your own commands but I’ve tried to
+   make this document as simple as possible.
+
+   All of the following elements correspond to my name, address, mobile, email
+   and homepage. The contents are not parsed by LaTeX so you could put anything
+   here, but you should aim to make each command as semantic as possible.
+
+   My personal info follows,
+
+   #+BEGIN_SRC latex
+\name{Matthew}{Bauer}
+\address{10118 GARNETT ST, OVERLAND PARK KS 66214}
+\mobile{(913) 671 0636}
+\email{mjbauer95@gmail.com}
+\homepage{www.matthewbauer.us}
+   #+END_SRC
+
+   This begins the document. The command =makecvheader= is from resume.cls and
+   will setup the basic template.
+
+  #+BEGIN_SRC latex
+\begin{document}
+
+\makecvheader[C]
+  #+END_SRC
+
+  Everything that follows is my own résume, but the ideas should be fairly self-explanatory.
+
+** Education
+
+  This LaTeX class defines =\cvsection= to separate sections of the résumé by a
+  horizontal line and some blank space. The only argument for =\cvsection= sets
+  the contents of the section header.
+
+  I start my résume with the ‘Eduction’ section.
+
+  #+BEGIN_SRC latex
+\cvsection{Education}
+
+\begin{cventries}
+  #+END_SRC
+
+  Each =cvsection= is composed of multiple =cventries=.
+
+  #+BEGIN_SRC latex
+\cventry
+  {University of Kansas}
+  {Lawrence, KS, USA}
+  {B.S. in Computer Science, 3.4 GPA}
+  {Aug. 2015 – Exp. Dec. 2018}
+  {
+    \begin{cvitems}
+    \item { Participated in ACM and hackathon competitions }
+    \item { Coursework includes Software Engineering, Programming Languages,
+        and Communication Networks }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+  =cventry= can be though of as a function that takes a variable 5 arguments.
+  The first will be the heading used. The second will be on the right-hand side
+  in /italics/. The third will be in /italics/ immediately below the first. The
+  fourth will be on the right-hand side of the third argument. The last argument
+  provides items for the entry.
+
+  For my résumé, I have chosen to use each of these arguments for certain
+  purposes. It’s not necessary to do the same, but you should use a consistent
+  style throughout your résumé.
+
+  | left         | right        |
+  |--------------+--------------|
+  | argument 1   | /argument 2/ |
+  | /argument 3/ | /argument 4/ |
+
+  For me, they correspond to,
+
+  | left                  | right                   |
+  |-----------------------+-------------------------|
+  | Company or University | /Location/              |
+  | /Position or degree/  | /Start date - end date/ |
+
+  #+BEGIN_SRC latex
+\end{cventries}
+  #+END_SRC
+
+  The next section has work experience. It follows the same pattern outlined in
+  the Education section.
+
+** Work Experience
+
+  #+BEGIN_SRC latex
+\cvsection{Work Experience}
+
+\begin{cventries}
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+\cventry
+  {Amazon.com, Inc.}
+  {Seattle, WA, USA}
+  {SDE Intern}
+  {Summer 2017}
+  {
+    \begin{cvitems}
+    \item { Worked on Mobile Identity team which manages the login screens for
+            Amazon apps }
+    \item { Project made it easier for teams to register new devices through
+            Identity Services }
+    \item { Used Agile development principles in design and development of
+            project }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+\cventry
+  {Lexmark Enterprise Software}
+  {Lenexa, KS, USA}
+  {Software Engineer Intern}
+  {Summer 2015, Summer 2016}
+  {
+    \begin{cvitems}
+    \item { Worked on the Client Architecture team which builds the JavaScript
+        web framework which other teams use to build enterprise solutions }
+    \item { Participated in high level design decision conversations }
+    \item { Project moved the web framework away from in-house solutions to
+        better maintained open source projects while preserving legacy
+        compatibility }
+    \item { Asked to return after impressive first year }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+\cventry
+  {Together+Clinic}
+  {Lincoln, NE, USA}
+  {Design Studio Intern}
+  {Spring 2015}
+  {
+    \begin{cvitems}
+    \item { Startup building web app to let doctors track patients recovering
+        from surgery without frequent checkup visits }
+    \item { The web interface is used by both patients to record progress and
+        doctors to track progress }
+    \item { Team used Scrum development principles for quick response and user
+        focused design }
+    \end{cvitems}
+  }
+  #+END_SRC
+
+  Here we end =cventries=.
+
+  #+BEGIN_SRC latex
+\end{cventries}
+  #+END_SRC
+
+** Honors & Awards
+
+   Again we must define a new section, this time for honors and awards.
+
+  #+BEGIN_SRC latex
+\cvsection{Honors \& Awards}
+\begin{cvhonors}
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+  \cvhonor
+  {3rd Place}
+  {JayHacks Hackathon}
+  {Lawrence, KS, USA}
+  {2017}
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+  \cvhonor
+  {Grand Prize}
+  {Google Code-in}
+  {Mountain View, CA, USA}
+  {2013}
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+\end{cvhonors}
+  #+END_SRC
+
+** Footer
+
+ The =makecvfooter= command gives a nice footer that will be put at the bottom
+ of each page. This can give us the document title and page numbering. In
+ addition, the LastPage command will tell us how many pages there are in case
+ we misplace a page while printing.
+
+    #+BEGIN_SRC latex
+\makecvfooter
+{BAUER}
+{\thepage}
+{\pageref{LastPage}}
+    #+END_SRC
+
+    #+BEGIN_SRC latex
+\end{document}
+    #+END_SRC
+
 * Building it
   :PROPERTIES:
   :header-args: :tangle resume.nix
@@ -708,7 +712,7 @@ be sent to employers.
   setup, provided you have *sudo* access. Run the following and follow some
   simple steps to get Nix working,
 
-  #+BEGIN_SRC shell :tangle no
+  #+BEGIN_SRC sh :tangle no
 curl https://nixos.org/nix/install | sh
   #+END_SRC
 
@@ -732,7 +736,7 @@ curl https://nixos.org/nix/install | sh
   =<nixpkgs>= refers to the nixpkgs channels that the user has setup. It can be
   updated with,
 
-  #+BEGIN_SRC shell :tangle no
+  #+BEGIN_SRC sh :tangle no
 nix-channel --update
   #+END_SRC
 
@@ -779,7 +783,7 @@ stdenv.mkDerivation {
 
   #+BEGIN_SRC nix
   buildPhase = ''
-    xelatex -file-line-error -interaction=nonstopmode "\input" resume.tex
+    xelatex -file-line-error -interaction=nonstopmode resume.tex
   '';
   #+END_SRC
 
@@ -809,7 +813,7 @@ stdenv.mkDerivation {
    we can generate the files needed to build the résumé from scratch. To do
    this, first we must clone this repository (if you haven’t already).
 
-   #+BEGIN_SRC shell
+   #+BEGIN_SRC sh
 git clone https://github.com/matthewbauer/resume
 cd resume
    #+END_SRC
@@ -817,7 +821,7 @@ cd resume
    Next, we need to open this file in Emacs and generate the files (/tangle/ it
    in Babel lingo). Run this now, if you haven’t already,
 
-   #+BEGIN_SRC shell
+   #+BEGIN_SRC sh
 emacs README.org
    #+END_SRC
 
@@ -826,7 +830,7 @@ emacs README.org
    have all of the files /tangled/ inside README.org. You can build the résumé
    with,
 
-   #+BEGIN_SRC shell
+   #+BEGIN_SRC sh
 nix-build resume.nix
    #+END_SRC
 
@@ -893,7 +897,7 @@ in import README {inherit nixpkgs;}
   Now, we can finally build the Résumé! To do this, we just need to run
   =nix-build= from the command line.
 
-  #+BEGIN_SRC shell :tangle no
+  #+BEGIN_SRC sh :tangle no
 nix-build
   #+END_SRC
 
@@ -985,6 +989,12 @@ matrix:
    build a ~resume.pdf~ every time you commit a change. You should be able to
    set this up yourself but alternatively you can look at [[https://travis-ci.org/matthewbauer/resume][my Travis dashboard]].
 
+   #+BEGIN_HTML
+   <a href="https://travis-ci.org/matthewbauer/bauer">
+   <img src="https://travis-ci.org/matthewbauer/bauer.svg?branch=master"></img>
+   </a>
+   #+END_HTML
+
 * Conclusion
   More information on reproducible research is available at [[https://reproducibleresearch.net][Reproducible
   Research]]. My hope is that eventually more things will become ‘reproducible’.
@@ -992,11 +1002,11 @@ matrix:
   entered into the average Software Developer’s toolbelt. Reproducible projects
   may take longer to setup, but they lead to more robust software systems.
   
-  Résumé require a careful mix of informative content and flashy styling. Too much
-  information and employers will be overwhelmed but too little and employers
-  assume you are inexperienced. Likewise, . Perhaps eventually, software companies will read
-  through résumés in org-mode instead of PDFs, but alas Silicon Valley has not
-  yet reached this level of Nirvana.
+  Résumé require a careful mix of informative content and flashy styling. Too
+  much information and employers will be overwhelmed but too little and
+  employers assume you are inexperienced. Likewise, . Perhaps eventually,
+  software companies will read through résumés in org-mode instead of PDFs, but
+  alas Silicon Valley has not yet reached this level of Nirvana.
 
   I welcome everyone to fork [[https://github.com/matthewbauer/resume][the repo]] containing these files. You should be able
   to generate your own Résumé by modifying the contents of Semantic info and
