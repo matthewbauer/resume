@@ -543,8 +543,8 @@ a PDF version of your résume.
 \cventry
   {University of Kansas}
   {Lawrence, KS, USA}
-  {B.S. in Computer Science, 3.4 GPA}
-  {Aug. 2015 – Exp. Dec. 2018}
+  {B.S. in Computer Science}
+  {Aug. 2015 – Dec. 2018}
   {
     \begin{cvitems}
     \item { Participated in ACM and hackathon competitions }
@@ -586,64 +586,73 @@ a PDF version of your résume.
 ** Work Experience
 
   #+BEGIN_SRC latex
-\cvsection{Work Experience}
+    \cvsection{Work Experience}
 
-\begin{cventries}
+    \begin{cventries}
   #+END_SRC
 
   #+BEGIN_SRC latex
-\cventry
-  {Amazon.com, Inc.}
-  {Seattle, WA, USA}
-  {SDE Intern}
-  {Summer 2017}
-  {
-    \begin{cvitems}
-    \item { Worked on Mobile Identity team which manages the login screens for
-            Amazon apps }
-    \item { Project made it easier for teams to register new devices through
-            Identity Services }
-    \item { Used Agile development principles in design and development of
-            project }
-    \end{cvitems}
-  }
+    \cventry
+      {Obsidian Systems}
+      {New York, NY, USA}
+      {Software Developer}
+      {2018-Present}
+      {
+	\begin{cvitems}
+	\item { Developed with Reflex framework, a Haskell-based web
+	    framework }
+	\item { Helped to develop the new Obelisk, a deployment tool for
+	    Reflex framework }
+	\item { Worked on Nix expressions used in Reflex and Obelisk }
+	\end{cvitems}
+      }
   #+END_SRC
 
   #+BEGIN_SRC latex
-\cventry
-  {Lexmark Enterprise Software}
-  {Lenexa, KS, USA}
-  {Software Engineer Intern}
-  {Summer 2015, Summer 2016}
-  {
-    \begin{cvitems}
-    \item { Worked on the Client Architecture team which builds the JavaScript
-        web framework which other teams use to build enterprise solutions }
-    \item { Participated in high level design decision conversations }
-    \item { Project moved the web framework away from in-house solutions to
-        better maintained open source projects while preserving legacy
-        compatibility }
-    \item { Asked to return after impressive first year }
-    \end{cvitems}
-  }
+    \cventry {Amazon.com, Inc.} {Seattle, WA, USA} {SDE Intern} {Summer
+      2017} {
+	\begin{cvitems}
+	\item { Worked on Mobile Identity team which manages the login screens for
+		Amazon apps }
+	\item { Project made it easier for teams to register new devices through
+		Identity Services }
+	\item { Used Agile development principles in design and development of
+		project }
+	\end{cvitems}
+      }
   #+END_SRC
 
   #+BEGIN_SRC latex
-\cventry
-  {Together+Clinic}
-  {Lincoln, NE, USA}
-  {Design Studio Intern}
-  {Spring 2015}
-  {
-    \begin{cvitems}
-    \item { Startup building web app to let doctors track patients recovering
-        from surgery without frequent checkup visits }
-    \item { The web interface is used by both patients to record progress and
-        doctors to track progress }
-    \item { Team used Scrum development principles for quick response and user
-        focused design }
-    \end{cvitems}
-  }
+    \cventry
+      {Lexmark Enterprise Software}
+      {Lenexa, KS, USA}
+      {Software Engineer Intern}
+      {Summer 2015, Summer 2016}
+      {
+	\begin{cvitems}
+	\item { Worked on the Client Architecture team which builds the JavaScript
+	    web framework which other teams use to build enterprise solutions }
+	\item { Participated in high level design decision conversations }
+	\item { Project moved the web framework away from in-house
+	    solutions to better maintained open source projects while
+	    preserving legacy compatibility }
+	\item { Asked to return after impressive first year }
+	\end{cvitems}
+      }
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+    \cventry {Together+Clinic} {Lincoln, NE, USA} {Design Studio Intern}
+    {Spring 2015} {
+	\begin{cvitems}
+	\item { Startup building web app to let doctors track patients recovering
+	    from surgery without frequent checkup visits }
+	\item { The web interface is used by both patients to record progress and
+	    doctors to track progress }
+	\item { Team used Scrum development principles for quick response
+	    and user focused design }
+	\end{cvitems}
+      }
   #+END_SRC
 
   Here we end =cventries=.
@@ -758,7 +767,7 @@ stdenv.mkDerivation {
   #+BEGIN_SRC nix
   buildInputs = [
     (texlive.combine {
-      inherit (texlive) scheme-basic xetex xetex-def setspace fontspec
+      inherit (texlive) scheme-basic xetex setspace fontspec
                         chktex enumitem xifthen ifmtarg filehook
                         upquote tools ms geometry graphics oberdiek
                         fancyhdr lastpage xcolor etoolbox unicode-math
