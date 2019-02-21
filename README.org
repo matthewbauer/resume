@@ -641,20 +641,6 @@ a PDF version of your résume.
       }
   #+END_SRC
 
-  #+BEGIN_SRC latex
-    \cventry {Together+Clinic} {Lincoln, NE, USA} {Design Studio Intern}
-    {Spring 2015} {
-	\begin{cvitems}
-	\item { Startup building web app to let doctors track patients recovering
-	    from surgery without frequent checkup visits }
-	\item { The web interface is used by both patients to record progress and
-	    doctors to track progress }
-	\item { Team used Scrum development principles for quick response
-	    and user focused design }
-	\end{cvitems}
-      }
-  #+END_SRC
-
   Here we end =cventries=.
 
   #+BEGIN_SRC latex
