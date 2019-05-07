@@ -993,8 +993,8 @@ matrix:
    set this up yourself but alternatively you can look at [[https://travis-ci.org/matthewbauer/resume][my Travis dashboard]].
 
    #+BEGIN_HTML
-   <a href="https://travis-ci.org/matthewbauer/bauer">
-   <img src="https://travis-ci.org/matthewbauer/bauer.svg?branch=master"></img>
+   <a href="https://travis-ci.org/matthewbauer/resume">
+   <img src="https://travis-ci.org/matthewbauer/resume.svg?branch=master"></img>
    </a>
    #+END_HTML
 
