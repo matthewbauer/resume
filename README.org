@@ -511,7 +511,7 @@ a PDF version of your résume.
 
    #+BEGIN_SRC latex
 \name{Matthew}{Bauer}{}
-\address{10118 GARNETT ST, OVERLAND PARK KS 66214}
+\address{471 HART ST #2, Brooklyn, NY 11221}
 \mobile{(913) 671 0636}
 \email{mjbauer95@gmail.com}
 \homepage{www.matthewbauer.us}
