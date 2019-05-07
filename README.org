@@ -177,6 +177,9 @@ a PDF version of your résume.
 \newcommand*{\headerlastnamestyle}[1]{
   {\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }
 }
+\newcommand*{\headersuffixstyle}[1]{
+  {\fontsize{24pt}{1em}\headerfontspaced #1 }
+}
 
 \newcommand*{\headerpositionstyle}[1]{
   {\fontsize{7.6pt}{1em}\bodyfont\scshape #1}
@@ -258,10 +261,11 @@ a PDF version of your résume.
   Above we setup the basic font size and style to use for different parts of the doument.
 
 #+BEGIN_SRC latex
-\newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
+\newcommand*{\name}[3]{\def\@firstname{#1}\def\@lastname{#2}\def\@suffix{#3}}
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
 \newcommand*{\lastname}[1]{\def\@lastname{#1}}
 \newcommand*{\familyname}[1]{\def\@lastname{#1}}
+\newcommand*{\suffix}[1]{\def\@suffix{#1}}
 
 \newcommand*{\address}[1]{\def\@address{#1}}
 \newcommand*{\position}[1]{\def\@position{#1}}
@@ -322,6 +326,7 @@ a PDF version of your résume.
       {\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
     \headerfirstnamestyle{\@firstname}
     \headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}
+    \headersuffixstyle{{}\acvHeaderNameDelim\@suffix}
     \\[\acvHeaderAfterNameSkip]
 
     \ifthenelse{\isundefined{\@position}}
@@ -505,7 +510,7 @@ a PDF version of your résume.
    My personal info follows,
 
    #+BEGIN_SRC latex
-\name{Matthew}{Bauer}
+\name{Matthew}{Bauer}{}
 \address{10118 GARNETT ST, OVERLAND PARK KS 66214}
 \mobile{(913) 671 0636}
 \email{mjbauer95@gmail.com}

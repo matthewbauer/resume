@@ -83,6 +83,9 @@
 \newcommand*{\headerlastnamestyle}[1]{
   {\fontsize{24pt}{1em}\headerfontspaced\MakeUppercase{#1} }
 }
+\newcommand*{\headersuffixstyle}[1]{
+  {\fontsize{24pt}{1em}\headerfontspaced #1 }
+}
 
 \newcommand*{\headerpositionstyle}[1]{
   {\fontsize{7.6pt}{1em}\bodyfont\scshape #1}
@@ -160,10 +163,11 @@
   {\fontsize{9pt}{1em}\bodyfont #1}
 }
 
-\newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
+\newcommand*{\name}[3]{\def\@firstname{#1}\def\@lastname{#2}\def\@suffix{#3}}
 \newcommand*{\firstname}[1]{\def\@firstname{#1}}
 \newcommand*{\lastname}[1]{\def\@lastname{#1}}
 \newcommand*{\familyname}[1]{\def\@lastname{#1}}
+\newcommand*{\suffix}[1]{\def\@suffix{#1}}
 
 \newcommand*{\address}[1]{\def\@address{#1}}
 \newcommand*{\position}[1]{\def\@position{#1}}
@@ -216,6 +220,7 @@
       {\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
     \headerfirstnamestyle{\@firstname}
     \headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}
+    \headersuffixstyle{{}\acvHeaderNameDelim\@suffix}
     \\[\acvHeaderAfterNameSkip]
 
     \ifthenelse{\isundefined{\@position}}
