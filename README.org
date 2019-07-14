@@ -526,44 +526,25 @@ a PDF version of your résume.
 \makecvheader[C]
   #+END_SRC
 
-  Everything that follows is my own résume, but the ideas should be fairly self-explanatory.
+  Everything that follows is my own résume, but the ideas should be
+  fairly self-explanatory.
 
-** Education
+** Entries
 
   This LaTeX class defines =\cvsection= to separate sections of the résumé by a
   horizontal line and some blank space. The only argument for =\cvsection= sets
   the contents of the section header.
 
-  I start my résume with the ‘Eduction’ section.
-
   #+BEGIN_SRC latex
-\cvsection{Education}
-
 \begin{cventries}
   #+END_SRC
 
-  Each =cvsection= is composed of multiple =cventries=.
-
-  #+BEGIN_SRC latex
-\cventry
-  {University of Kansas}
-  {Lawrence, KS, USA}
-  {B.S. in Computer Science}
-  {Aug. 2015 – Dec. 2018}
-  {
-    \begin{cvitems}
-    \item { Participated in ACM and hackathon competitions }
-    \item { Coursework includes Software Engineering, Programming Languages,
-        and Communication Networks }
-    \end{cvitems}
-  }
-  #+END_SRC
-
-  =cventry= can be though of as a function that takes a variable 5 arguments.
-  The first will be the heading used. The second will be on the right-hand side
-  in /italics/. The third will be in /italics/ immediately below the first. The
-  fourth will be on the right-hand side of the third argument. The last argument
-  provides items for the entry.
+  Each =cvsection= is composed of multiple =cventries=. =cventry= can
+  be though of as a function that takes a variable 5 arguments. The
+  first will be the heading used. The second will be on the right-hand
+  side in /italics/. The third will be in /italics/ immediately below
+  the first. The fourth will be on the right-hand side of the third
+  argument. The last argument provides items for the entry.
 
   For my résumé, I have chosen to use each of these arguments for certain
   purposes. It’s not necessary to do the same, but you should use a consistent
@@ -601,13 +582,12 @@ a PDF version of your résume.
       {Obsidian Systems}
       {New York, NY, USA}
       {Software Developer}
-      {2018-Present}
+      {June 2018 – Present}
       {
 	\begin{cvitems}
 	\item { Developed with Reflex framework, a Haskell-based web
 	    framework }
-	\item { Helped to develop the new Obelisk, a deployment tool for
-	    Reflex framework }
+	\item { Helped in creating Obelisk, a deployment tool for Reflex }
 	\item { Worked on Nix expressions used in Reflex and Obelisk }
 	\end{cvitems}
       }
@@ -619,10 +599,10 @@ a PDF version of your résume.
 	\begin{cvitems}
 	\item { Worked on Mobile Identity team which manages the login screens for
 		Amazon apps }
-	\item { Project made it easier for teams to register new devices through
+	\item { Made it easier for teams to register new devices through
 		Identity Services }
-	\item { Used Agile development principles in design and development of
-		project }
+	\item { Learned enterprise Java programming through the Spring
+		Framework }
 	\end{cvitems}
       }
   #+END_SRC
@@ -638,9 +618,9 @@ a PDF version of your résume.
 	\item { Worked on the Client Architecture team which builds the JavaScript
 	    web framework which other teams use to build enterprise solutions }
 	\item { Participated in high level design decision conversations }
-	\item { Project moved the web framework away from in-house
-	    solutions to better maintained open source projects while
-	    preserving legacy compatibility }
+	\item { Moved web framework away from in-house solutions to better
+	    maintained open source projects while preserving legacy
+	    compatibility }
 	\item { Asked to return after impressive first year }
 	\end{cvitems}
       }
@@ -650,6 +630,28 @@ a PDF version of your résume.
 
   #+BEGIN_SRC latex
 \end{cventries}
+  #+END_SRC
+
+** Education
+
+  Education section contains basic information on university or
+  college background.
+
+  #+BEGIN_SRC latex
+\cvsection{Education}
+
+\cventry
+  {University of Kansas}
+  {Lawrence, KS, USA}
+  {B.S. in Computer Science}
+  {Aug. 2015 – Dec. 2018}
+  {
+    \begin{cvitems}
+    \item { Participated in ACM and hackathon competitions }
+    \item { Coursework includes Software Engineering, Programming Languages,
+        and Communication Networks }
+    \end{cvitems}
+  }
   #+END_SRC
 
 ** Honors & Awards
