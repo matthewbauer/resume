@@ -16,7 +16,6 @@
 \RequirePackage{ragged2e}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
-\RequirePackage{lastpage}
 \RequirePackage{xcolor}
 \RequirePackage{ifxetex}
 \RequirePackage{xifthen}
@@ -260,7 +259,7 @@
 }
 
 \newcommand*{\makecvfooter}[3]{
-  \fancyfoot[C]{\footerstyle{#1 RÉSUMÉ — PAGE #2 of #3}}
+  \fancyfoot[C]{\footerstyle{#1 RÉSUMÉ — PAGE #2}}
 }
 
 \newcommand{\cvsection}[1]{

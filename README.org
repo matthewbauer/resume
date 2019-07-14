@@ -90,7 +90,6 @@ a PDF version of your résume.
 \RequirePackage{ragged2e}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
-\RequirePackage{lastpage}
 \RequirePackage{xcolor}
 \RequirePackage{ifxetex}
 \RequirePackage{xifthen}
@@ -366,7 +365,7 @@ a PDF version of your résume.
 }
 
 \newcommand*{\makecvfooter}[3]{
-  \fancyfoot[C]{\footerstyle{#1 RÉSUMÉ — PAGE #2 of #3}}
+  \fancyfoot[C]{\footerstyle{#1 RÉSUMÉ — PAGE #2}}
 }
 #+END_SRC
 
@@ -640,6 +639,8 @@ a PDF version of your résume.
   #+BEGIN_SRC latex
 \cvsection{Education}
 
+\begin{cventries}
+
 \cventry
   {University of Kansas}
   {Lawrence, KS, USA}
@@ -652,6 +653,8 @@ a PDF version of your résume.
         and Communication Networks }
     \end{cvitems}
   }
+
+\end{cventries}
   #+END_SRC
 
 ** Honors & Awards
