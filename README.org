@@ -580,7 +580,7 @@ a PDF version of your résume.
     \cventry
       {Obsidian Systems}
       {New York, NY, USA}
-      {Software Developer}
+      {Software Engineer}
       {June 2018 – Present}
       {
 	\begin{cvitems}
