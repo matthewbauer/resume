@@ -219,7 +219,9 @@
       {\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
     \headerfirstnamestyle{\@firstname}
     \headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}
-    \headersuffixstyle{{}\acvHeaderNameDelim\@suffix}
+    \ifthenelse{\equal{\@suffix}{}}
+      {}
+      {\headersuffixstyle{{}\acvHeaderNameDelim\@suffix}}
     \\[\acvHeaderAfterNameSkip]
 
     \ifthenelse{\isundefined{\@position}}
