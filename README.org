@@ -512,7 +512,7 @@ a PDF version of your résume.
 
    #+BEGIN_SRC latex
 \name{Matthew}{Bauer}{}
-\address{313 E 85TH ST \#2C, New York, NY 10028}
+\address{313 E 85th St \#2C, New York, NY 10028}
 \mobile{(913) 671 0636}
 \email{mjbauer95@gmail.com}
 \homepage{www.matthewbauer.us}
