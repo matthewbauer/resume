@@ -13,7 +13,6 @@
 \RequirePackage{setspace}
 \RequirePackage{array}
 \RequirePackage{enumitem}
-\RequirePackage{ragged2e}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
