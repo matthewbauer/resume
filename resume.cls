@@ -176,11 +176,9 @@
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 \renewcommand*{\quote}[1]{\def\@quote{#1}}
 
-\newcommand{\acvHeaderNameDelim}{\space}
 \newcommand{\acvHeaderAfterNameSkip}{.4mm}
 \newcommand{\acvHeaderAfterPositionSkip}{.4mm}
 \newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
-\newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 \newcommand{\acvHeaderAfterSocialSkip}{6mm}
 \newcommand{\acvHeaderAfterQuoteSkip}{5mm}
@@ -218,10 +216,10 @@
       {\raggedright}
       {\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
     \headerfirstnamestyle{\@firstname}
-    \headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}
+    \headerlastnamestyle{{}\@lastname}
     \ifthenelse{\equal{\@suffix}{}}
       {}
-      {\headersuffixstyle{{}\acvHeaderNameDelim\@suffix}}
+      {\headersuffixstyle{{}\@suffix}}
     \\[\acvHeaderAfterNameSkip]
 
     \ifthenelse{\isundefined{\@position}}
@@ -238,20 +236,20 @@
       \ifthenelse{\isundefined{\@mobile}}
       {}
       {
-        \acvHeaderIconSep\@mobile
+        \@mobile
         \setbool{isstart}{false}
       }
       \ifthenelse{\isundefined{\@homepage}}
       {}
       {
         \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}
-        \href{http://\@homepage}{\acvHeaderIconSep\@homepage}
+        \href{http://\@homepage}{\@homepage}
       }
       \ifthenelse{\isundefined{\@email}}
       {}
       {
         \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}
-        \href{mailto:\@email}{\acvHeaderIconSep\@email}
+        \href{mailto:\@email}{\@email}
       }
     } \\[\acvHeaderAfterSocialSkip]
     \ifthenelse{\isundefined{\@quote}}
