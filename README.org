@@ -509,7 +509,7 @@ a PDF version of your résume.
 
    #+BEGIN_SRC latex
 \name{Matthew}{Bauer}{}
-\address{313 E 85th St \#2C, New York, NY 10028}
+\address{11641 W 118th Terrace \#725, Overland Park, KS 66210}
 \mobile{(913) 671 0636}
 \email{mjbauer95@gmail.com}
 \homepage{www.matthewbauer.us}
@@ -577,10 +577,19 @@ a PDF version of your résume.
 
   #+BEGIN_SRC latex
     \cventry
+      {Mercury}
+      {Remote}
+      {Software Engineer}
+      {January 2021 – Present}
+      {}
+  #+END_SRC
+
+  #+BEGIN_SRC latex
+    \cventry
       {Obsidian Systems}
       {New York, NY, USA}
       {Software Engineer}
-      {June 2018 – Present}
+      {June 2018 – December 2020}
       {
 	\begin{cvitems}
 	\item { Developed with Reflex framework, a Haskell-based web
@@ -615,11 +624,9 @@ a PDF version of your résume.
 	\begin{cvitems}
 	\item { Worked on the Client Architecture team which builds the JavaScript
 	    web framework which other teams use to build enterprise solutions }
-	\item { Participated in high level design decision conversations }
 	\item { Moved web framework away from in-house solutions to better
 	    maintained open source projects while preserving legacy
 	    compatibility }
-	\item { Asked to return after impressive first year }
 	\end{cvitems}
       }
   #+END_SRC
