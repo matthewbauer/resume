@@ -509,8 +509,8 @@ a PDF version of your résume.
 
    #+BEGIN_SRC latex
 \name{Matthew}{Bauer}{}
-\address{11641 W 118th Terrace \#725, Overland Park, KS 66210}
-\mobile{(913) 671 0636}
+\address{4200 W 54th Ter, Roeland Park, KS 66205}
+\mobile{+1 (913) 671-0636}
 \email{mjbauer95@gmail.com}
 \homepage{www.matthewbauer.us}
    #+END_SRC
